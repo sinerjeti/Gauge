@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Handlers;
 
 namespace Gauge
 {
@@ -19,6 +20,20 @@ namespace Gauge
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+//============
+/* 
+Короче в андроиде есть тема в <Entry/> под названием "нативное подчеркивание".
+Оно меня заебало и я его убираю.
+*/
+#if ANDROID
+            EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+            {
+                handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(
+                    Android.Graphics.Color.Transparent);
+            });
+#endif
+//============
 
             return builder.Build();
         }

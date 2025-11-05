@@ -7,6 +7,7 @@ namespace Gauge
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(SecondLoginPage), typeof(SecondLoginPage));
+            Routing.RegisterRoute(nameof(RegisterLoginPage), typeof(RegisterLoginPage));
         }
     }
 }
