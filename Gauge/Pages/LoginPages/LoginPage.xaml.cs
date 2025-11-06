@@ -1,8 +1,8 @@
 namespace Gauge.Pages.LoginPages;
 
-public partial class FirstLoginPage : ContentPage
+public partial class LoginPage : ContentPage
 {
-	public FirstLoginPage()
+	public LoginPage()
 	{
 		InitializeComponent();
 	}
@@ -26,9 +26,14 @@ public partial class FirstLoginPage : ContentPage
               пока это все происходит, я какую-нибудь анимку добавлю и заебок будет.
             * если же у типа нет инета и запросы к серверу не идут, надо будет ему тоже собщение с
               ошибкой вывести что инета нет.
-        3. переход на некст страницу.
+        3.1 если номер был найден, на телефон пользователя будет отправлен проверочный код. должна
+            быть анимация подъема строки с вводом номера чуть выше, а на ее место придти новая
+            строка с вводом кода. после успешного ввода кода появится третья строка с вводом пароля,
+            а уже после переход на основную страницу. 
+        3.2 если номер не был найден, но он правильный, значит чела надо зарегистрировать. 
+            оправляете его на страницу RegistrationPage
         */
-        await Shell.Current.GoToAsync("RegisterLoginPage"); //for test
+        await Shell.Current.GoToAsync("RegistrationPage"); //for test
     }
 
 }

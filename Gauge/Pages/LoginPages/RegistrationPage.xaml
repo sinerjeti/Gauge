@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gauge.Pages.LoginPages.RegistrationPage"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+
+    <Grid
+        RowDefinitions="Auto, *"
+        ColumnDefinitions="*"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill"
+        Padding="20, 0, 20, 0">
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalOptions="Center">
+
+            <Image
+                Source="animka.png"
+                WidthRequest="200"
+                HeightRequest="200"/>
+
+            <Label
+                Text="Давайте познакомимся?"
+                HorizontalOptions="Center"
+                FontSize="26"
+                FontAttributes="Bold"
+                FontFamily="Comfortaa"/>
+
+            <Label
+                Text="бубубу"
+                HorizontalOptions="Center"
+                FontSize="14"
+                FontAttributes="Bold"
+                FontFamily="Comfortaa"/>
+            <!--тут будет оторажаться еще номер пользователя, который он вводил-->
+
+        </VerticalStackLayout>
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            RowDefinitions="Auto, Auto, Auto"
+            ColumnDefinitions="*"
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
+            >
+
+            <!--first stroke-->
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Stroke="#2d0c98"
+                StrokeThickness="2"
+                StrokeShape="15"
+                Padding="0"
+                Margin="0, 0, 0, 10"
+                HorizontalOptions="Fill">
+
+                <Entry
+                    Placeholder="qw1lkky"
+                    x:Name="NewUserName"
+                    FontFamily="Comfortaa"
+                    Margin="10, 0, 10, 0"
+                    Keyboard="Text"/>
+
+            </Border>
+            
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Text=" Имя пользователя  "
+                TextColor="#2d0c98"
+                FontSize="12"
+                FontAttributes="Bold"
+                FontFamily="Comfortaa"
+                TranslationY="-9"
+                Background="White"/>
+
+            <!--second stroke-->
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Stroke="#2d0c98"
+                StrokeThickness="2"
+                StrokeShape="15"
+                Margin="0, 0, 0, 10"
+                HorizontalOptions="Fill">
+
+                <Entry
+                    Placeholder="Осуждаю"
+                    x:Name="NewUserPassword"
+                    FontFamily="Comfortaa"
+                    Margin="10, 0, 10, 0"
+                    Keyboard="Password"/>
+
+            </Border>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Text=" Пароль  "
+                TextColor="#2d0c98"
+                FontSize="12"
+                FontAttributes="Bold"
+                FontFamily="Comfortaa"
+                TranslationY="-9"
+                Background="White"/>
+
+            <!--date n gender-->
+            <Grid
+                Grid.Row="2"
+                Grid.Column="0"
+                RowDefinitions="*"
+                ColumnDefinitions="auto, auto"
+                HorizontalOptions="Fill">
+
+                <!--date-->
+                <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Stroke="#2d0c98"
+                StrokeThickness="2"
+                StrokeShape="15"
+                Margin="0, 0, 0, 10"
+                HorizontalOptions="Fill">
+
+                    <DatePicker
+                        x:Name="NewDate"
+                        Format="dd.MM.yyyy"
+                        Margin="30,0,30,0"
+                        FontFamily="Comfortaa"
+                        TextColor="#d0d0d0"
+                        />
+
+                </Border>
+
+                <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Text=" Дата рождения "
+                TextColor="#2d0c98"
+                FontSize="12"
+                FontAttributes="Bold"
+                FontFamily="Comfortaa"
+                TranslationY="-9"
+                Background="White"/>
+                
+                <!--gender-->
+                <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                Stroke="#2d0c98"
+                StrokeThickness="2"
+                StrokeShape="15"
+                Margin="0, 0, 0, 10"
+                HorizontalOptions="Fill">
+
+
+
+                </Border>
+
+                <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Text=" Дата рождения "
+                TextColor="#2d0c98"
+                FontSize="12"
+                FontAttributes="Bold"
+                FontFamily="Comfortaa"
+                TranslationY="-9"
+                Background="White"/>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+    
+</ContentPage>

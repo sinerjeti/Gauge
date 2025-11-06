@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Gauge.Pages.LoginPages.FirstLoginPage"
+             x:Class="Gauge.Pages.LoginPages.LoginPage"
              BackgroundColor="White"
              Shell.NavBarIsVisible="False">
 
     <Grid 
-        RowDefinitions="*, Auto" ColumnDefinitions="*"
+        RowDefinitions="*, Auto"
+        ColumnDefinitions="*"
         HorizontalOptions="Fill" 
         VerticalOptions="Fill" 
-        Padding="20">
+        Padding="20, 0, 20, 0">
 
         <VerticalStackLayout
-            Grid.Row="0" Grid.Column="0"
+            Grid.Row="0"
+            Grid.Column="0"
             Spacing="15" 
             HorizontalOptions="Center" 
             VerticalOptions="Start">
@@ -33,6 +35,7 @@
                 FontFamily="Comfortaa"/>
 
             <Label 
+                x:Name="LoginStatusText"
                 Text="Введите номер телефона, чтобы войти или зарегистрироваться."
                 HorizontalOptions="Center"
                 WidthRequest="300"
@@ -59,12 +62,13 @@
                 HorizontalOptions="Fill">
 
                 <Entry 
-                    Placeholder="Телефон"
+                    Placeholder="+7 (905) 905-05-05"
                     x:Name="LoginNumber"
                     FontFamily="Comfortaa"
                     Margin="10, 0, 10, 0"
                     Keyboard="Numeric"
                     Completed="InLoginNextPage"/>
+                <!--тут надо будет допилить анимку, ввод надо запретить, когда начнется анимка-->
 
             </Border>
 
@@ -79,6 +83,19 @@
                 Clicked="InLoginNextPage"/>
 
         </VerticalStackLayout>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            VerticalOptions="Start"
+            HorizontalOptions="Center"
+            Text=" Номер телефона "
+            TextColor="#2d0c98"
+            FontSize="12"
+            FontAttributes="Bold"
+            FontFamily="Comfortaa"
+            TranslationY="-9"
+            Background="White"/>
 
     </Grid>
 

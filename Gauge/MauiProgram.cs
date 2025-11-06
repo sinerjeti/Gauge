@@ -21,19 +21,28 @@ namespace Gauge
     		builder.Logging.AddDebug();
 #endif
 
-//============
-/* 
-Короче в андроиде есть тема в <Entry/> под названием "нативное подчеркивание".
-Оно меня заебало и я его убираю.
-*/
+            //============
+            /* 
+            Короче в андроиде есть тема в <Entry/> и в <DatePicker/>под названием "нативное подчеркивание".
+            Оно меня заебало и я его убираю.
+            */
 #if ANDROID
             EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
             {
                 handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(
                     Android.Graphics.Color.Transparent);
             });
+
+            DatePickerHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+            {
+                if (handler.PlatformView is AndroidX.AppCompat.Widget.AppCompatEditText platformView)
+                {
+                    platformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(
+                        Android.Graphics.Color.Transparent);
+                }
+            });
 #endif
-//============
+            //============
 
             return builder.Build();
         }

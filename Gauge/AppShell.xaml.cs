@@ -6,8 +6,7 @@ namespace Gauge
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(SecondLoginPage), typeof(SecondLoginPage));
-            Routing.RegisterRoute(nameof(RegisterLoginPage), typeof(RegisterLoginPage));
+            Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
         }
     }
 }
