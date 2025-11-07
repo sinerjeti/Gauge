@@ -6,12 +6,13 @@
              Shell.NavBarIsVisible="False">
 
     <Grid
-        RowDefinitions="Auto, *"
+        RowDefinitions="auto, *, *"
         ColumnDefinitions="*"
         VerticalOptions="Fill"
         HorizontalOptions="Fill"
         Padding="20, 0, 20, 0">
 
+        <!--анимка, текста-->
         <VerticalStackLayout
             Grid.Row="0"
             Grid.Column="0"
@@ -39,14 +40,15 @@
 
         </VerticalStackLayout>
 
+        <!--ввод данных-->
         <Grid
             Grid.Row="1"
             Grid.Column="0"
             RowDefinitions="Auto, Auto, Auto"
             ColumnDefinitions="*"
-            VerticalOptions="Fill"
+            VerticalOptions="End"
             HorizontalOptions="Fill"
-            >
+            Margin="0, 10, 0, 0">
 
             <!--first stroke-->
             <Border
@@ -113,12 +115,12 @@
                 TranslationY="-9"
                 Background="White"/>
 
-            <!--date n gender-->
+            <!--date/gender-->
             <Grid
                 Grid.Row="2"
                 Grid.Column="0"
                 RowDefinitions="*"
-                ColumnDefinitions="auto, auto"
+                ColumnDefinitions="auto, *"
                 HorizontalOptions="Fill">
 
                 <!--date-->
@@ -134,10 +136,8 @@
                     <DatePicker
                         x:Name="NewDate"
                         Format="dd.MM.yyyy"
-                        Margin="30,0,30,0"
-                        FontFamily="Comfortaa"
-                        TextColor="#d0d0d0"
-                        />
+                        Margin="40, 0, 40, 0"
+                        FontFamily="Comfortaa"/>
 
                 </Border>
 
@@ -161,10 +161,105 @@
                 Stroke="#2d0c98"
                 StrokeThickness="2"
                 StrokeShape="15"
-                Margin="0, 0, 0, 10"
+                Margin="10, 0, 0, 10"
                 HorizontalOptions="Fill">
 
+                    <Picker
+                    x:Name="NewUserGender"
+                    Title="пол"
+                    TitleColor="#d0d0d0"
+                    FontFamily="Comfortaa"
+                    VerticalOptions="Center"
+                    Margin="10, 0, 10, 0"
+                    BackgroundColor="Transparent">
 
+                        <Picker.Items>
+
+                            <x:String>Мужской</x:String>
+                            <x:String>Женский</x:String>
+
+                            <x:String>Абимигендер</x:String>
+                            <x:String>Этергендер</x:String>
+                            <x:String>Архаигендер</x:String>
+                            <x:String>Астергендер</x:String>
+                            <x:String>Астралгендер</x:String>
+                            <x:String>Биогендер</x:String>
+                            <x:String>Блицгендер</x:String>
+                            <x:String>Боггендер</x:String>
+                            <x:String>Цельгендер</x:String>
+                            <x:String>Кармигендер</x:String>
+                            <x:String>Циркгендер</x:String>
+                            <x:String>Цветогендер</x:String>
+                            <x:String>Контигендер</x:String>
+                            <x:String>Кристагендер</x:String>
+                            <x:String>Даймогендер</x:String>
+                            <x:String>Дельфигендер</x:String>
+                            <x:String>Дриагендер</x:String>
+                            <x:String>Землегендер</x:String>
+                            <x:String>Экрагендер</x:String>
+                            <x:String>Элдригендер</x:String>
+                            <x:String>Элегендер</x:String>
+                            <x:String>Элементгендер</x:String>
+                            <x:String>Энергогендер</x:String>
+                            <x:String>Энтеогендер</x:String>
+                            <x:String>Фаунгендер</x:String>
+                            <x:String>Огнегендер</x:String>
+                            <x:String>Морозогендер</x:String>
+                            <x:String>Гендераль</x:String>
+                            <x:String>Гендерплазма</x:String>
+                            <x:String>Гендерпустота</x:String>
+                            <x:String>Гендфлёр</x:String>
+                            <x:String>Стеклогендер</x:String>
+                            <x:String>Мерцагендер</x:String>
+                            <x:String>Гелиогендер</x:String>
+                            <x:String>Гидрогендер</x:String>
+                            <x:String>Инвизигендер</x:String>
+                            <x:String>Ирагендер</x:String>
+                            <x:String>Ламингендер</x:String>
+                            <x:String>Леогендер</x:String>
+                            <x:String>Лейкогендер</x:String>
+                            <x:String>Лихтгендер</x:String>
+                            <x:String>Любогендер</x:String>
+                            <x:String>Медейгендер</x:String>
+                            <x:String>Мелогендер</x:String>
+                            <x:String>Моллигендер</x:String>
+                            <x:String>Мистигендер</x:String>
+                            <x:String>Никтогендер</x:String>
+                            <x:String>Обруогендер</x:String>
+                            <x:String>Орбгендер</x:String>
+                            <x:String>Пиктогендер</x:String>
+                            <x:String>Прециогендер</x:String>
+                            <x:String>Моргендер</x:String>
+                            <x:String>Ракушкогендер</x:String>
+                            <x:String>Тенуигендер</x:String>
+                            <x:String>Ведьмогендер</x:String>
+                            <x:String>Ксеногендер</x:String>
+                            <x:String>Зодиакгендер</x:String>
+                            <x:String>Цис-женщина</x:String>
+                            <x:String>Цис-мужчина</x:String>
+                            <x:String>Цисгендер</x:String>
+                            <x:String>Транс-мужчина (FTM)</x:String>
+                            <x:String>Транс-женщина (MTF)</x:String>
+                            <x:String>Трансмаскулинность</x:String>
+                            <x:String>Агендер</x:String>
+                            <x:String>Андрогин</x:String>
+                            <x:String>Бигендер</x:String>
+                            <x:String>Гендер-флюид</x:String>
+                            <x:String>Гендерквир</x:String>
+                            <x:String>Интерсекс</x:String>
+                            <x:String>Небинарный</x:String>
+                            <x:String>Нейтроис</x:String>
+                            <x:String>Пангендер</x:String>
+                            <x:String>Гендер-неконформный</x:String>
+                            <x:String>Трансгендер-мужчина</x:String>
+                            <x:String>Трансгендер-женщина</x:String>
+                            <x:String>Транссексуал-мужчина</x:String>
+                            <x:String>Транссексуал-женщина</x:String>
+                            <x:String>Другое</x:String>
+
+                        </Picker.Items>
+                        
+                    </Picker>
 
                 </Border>
 
@@ -173,7 +268,7 @@
                 Grid.Column="1"
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
-                Text=" Дата рождения "
+                Text=" Пол "
                 TextColor="#2d0c98"
                 FontSize="12"
                 FontAttributes="Bold"
@@ -185,6 +280,129 @@
 
         </Grid>
 
+        <!--флажки, кнопка-->
+        <VerticalStackLayout
+            Grid.Row="2"
+            Grid.Column="0"
+            Spacing="-6"
+            VerticalOptions="End">
+
+            <!--первый флажок-->
+            <HorizontalStackLayout>
+                
+                <CheckBox 
+                    x:Name="AgreementCheckBox"
+                    Color="#2d0c98"/>
+
+                <Label 
+                    VerticalOptions="Center"
+                    FontSize="12">
+                    
+                    <Label.FormattedText>
+                        
+                        <FormattedString>
+
+                            <Span
+                                Text="Я принимаю "
+                                FontFamily="Comfortaa"
+                                TextDecorations="None">
+                                
+                                <Span.GestureRecognizers>
+
+                                    <TapGestureRecognizer Tapped="TapAgreementCheckBoxText"/>
+                                    
+                                </Span.GestureRecognizers>
+                                
+                            </Span>
+
+                            <Span 
+                                Text="Пользовательское соглашение" 
+                                FontFamily="Comfortaa"
+                                FontAttributes="Bold" 
+                                TextDecorations="Underline" 
+                                TextColor="#2d0c98">
+                                
+                                <Span.GestureRecognizers>
+                                    
+                                    <TapGestureRecognizer Tapped="TapAgreementCheckBoxPage"/>
+                                    
+                                </Span.GestureRecognizers>
+                                
+                            </Span>
+                            
+                        </FormattedString>
+                        
+                    </Label.FormattedText>
+                    
+                </Label>
+                
+            </HorizontalStackLayout>
+
+            <!--второй флажок-->
+            <HorizontalStackLayout>
+                <CheckBox 
+                    x:Name="PrivacyCheckBox"
+                    Color="#2d0c98"/>
+
+                <Label
+                    VerticalOptions="Center"
+                    FontSize="12">
+                    
+                    <Label.FormattedText>
+                        
+                        <FormattedString>
+                            
+                            <Span
+                                Text="Я согласен с "
+                                FontFamily="Comfortaa"
+                                TextDecorations="None">
+                                
+                                <Span.GestureRecognizers>
+
+                                    <TapGestureRecognizer Tapped="TapPrivacyCheckBoxText"/>
+                                    
+                                </Span.GestureRecognizers>
+                                
+                            </Span>
+
+                            <Span
+                                Text="Политикой конфиденциальности" 
+                                FontFamily="Comfortaa"
+                                FontAttributes="Bold" 
+                                TextDecorations="Underline" 
+                                TextColor="#2d0c98">
+                                
+                                <Span.GestureRecognizers>
+
+                                    <TapGestureRecognizer Tapped="TapPrivacyCheckBoxPage"/>
+                                    
+                                </Span.GestureRecognizers>
+                                
+                            </Span>
+                            
+                        </FormattedString>
+                        
+                    </Label.FormattedText>
+                    
+                </Label>
+                
+            </HorizontalStackLayout>
+
+            <!--кнопка в конце-->
+            <Button
+                Text="Далее"
+                TextColor="White"
+                FontFamily="Comfortaa"
+                BackgroundColor="#2d0c98"
+                CornerRadius="15" 
+                HeightRequest="50"
+                HorizontalOptions="Fill"
+                VerticalOptions="End"
+                Margin="0, 12.5, 0, 20"
+                Clicked="InRegistrationNextPage"/>
+
+        </VerticalStackLayout>
+        
     </Grid>
     
 </ContentPage>
