@@ -12,6 +12,7 @@
         VerticalOptions="Fill" 
         Padding="20, 0, 20, 0">
 
+        <!--верх-->
         <VerticalStackLayout
             Grid.Row="0"
             Grid.Column="0"
@@ -19,6 +20,7 @@
             HorizontalOptions="Center" 
             VerticalOptions="Start">
 
+            <!--иконка-->
             <Image 
                 Source="applogo.png" 
                 HeightRequest="200" 
@@ -27,6 +29,7 @@
                 HorizontalOptions="Center" 
                 Margin="0, 50, 0, 0"/>
 
+            <!--первый текст-->
             <Label 
                 Text="Добро Пожаловать!"
                 HorizontalOptions="Center"
@@ -34,8 +37,9 @@
                 FontAttributes="Bold"
                 FontFamily="Comfortaa"/>
 
+            <!--второй текст-->
             <Label 
-                x:Name="LoginStatusText"
+                x:Name="LoginStatusText" 
                 Text="Введите номер телефона, чтобы войти или зарегистрироваться."
                 HorizontalOptions="Center"
                 WidthRequest="300"
@@ -46,58 +50,183 @@
 
         </VerticalStackLayout>
 
-        <VerticalStackLayout 
-            Grid.Row="1" 
-            Grid.Column="0" 
-            Spacing="15" 
-            HorizontalOptions="Fill"
-            VerticalOptions="End" 
-            Margin="0, 0, 0, 20">
-
-            <Border 
-                Stroke="#2d0c98"
-                StrokeThickness="2"
-                StrokeShape="15"
-                Padding="0"
-                HorizontalOptions="Fill">
-
-                <Entry 
-                    Placeholder="+7 (905) 905-05-05"
-                    x:Name="LoginNumber"
-                    FontFamily="Comfortaa"
-                    Margin="10, 0, 10, 0"
-                    Keyboard="Numeric"
-                    TextChanged="OnTextChanged"/>
-                <!--тут надо будет допилить анимку, ввод надо запретить, когда начнется анимка-->
-
-            </Border>
-
-            <Button
-                x:Name="NextButton"
-                Text="Далее"
-                TextColor="White"
-                FontFamily="Comfortaa"
-                BackgroundColor="#2d0c98"
-                CornerRadius="15"
-                HeightRequest="50"
-                HorizontalOptions="Fill"
-                Clicked="InLoginNextPage"
-                Opacity="0.5"/>
-
-        </VerticalStackLayout>
-
-        <Label
+        <!--низ-->
+        <VerticalStackLayout
+            x:Name="BottomContent"
             Grid.Row="1"
             Grid.Column="0"
-            VerticalOptions="Start"
-            HorizontalOptions="Center"
-            Text=" Номер телефона "
-            TextColor="#2d0c98"
-            FontSize="12"
-            FontAttributes="Bold"
-            FontFamily="Comfortaa"
-            TranslationY="-9"
-            Background="White"/>
+            Spacing="15" 
+            HorizontalOptions="Fill" 
+            VerticalOptions="End">
+            
+            <!--строки ввода-->
+            <Grid
+                RowDefinitions="Auto, Auto, Auto"
+                ColumnDefinitions="*"
+                HorizontalOptions="Fill"
+                Margin="0, 0, 0, 0">
+
+                <!--ввод номера-->
+                <Grid
+                    x:Name="Grid1"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    IsVisible="True"
+                    Margin="0, 15, 0, 0">
+                    
+                    <Border
+                        x:Name="LoginBorder"
+                        Stroke="#2d0c98"
+                        StrokeThickness="2"
+                        StrokeShape="15"
+                        Padding="0"
+                        Margin="0, 0, 0, 10"
+                        HorizontalOptions="Fill">
+
+                        <Entry 
+                            Placeholder="+7 (905) 905-05-05"
+                            x:Name="LoginNumber"
+                            FontFamily="Comfortaa"
+                            Margin="10, 0, 10, 0"
+                            Keyboard="Numeric"
+                            Completed="EnterLoginNumber"
+                            TextChanged="ChangedLoginNumber"/>
+
+                    </Border>
+
+                    <Label
+                        x:Name="LoginLabel"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        Text=" Номер телефона "
+                        TextColor="#2d0c98"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        FontFamily="Comfortaa"
+                        TranslationY="-9"
+                        Background="White"/>
+                    
+                </Grid>
+                
+                <!--ввод проверочного кода-->
+                <Grid
+                    x:Name="Grid2"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    IsVisible="False"
+                    Margin="0,15, 0, 0">
+                    
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Stroke="#2d0c98"
+                        StrokeThickness="2"
+                        StrokeShape="15"
+                        Padding="0"
+                        Margin="0, 0, 0, 10"
+                        HorizontalOptions="Fill">
+
+                        <Entry 
+                            Placeholder="1234"
+                            x:Name="VerificationCode"
+                            FontFamily="Comfortaa"
+                            Margin="10, 0, 10, 0"
+                            Keyboard="Numeric"
+/>
+
+                    </Border>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        Text=" Проверочный код "
+                        TextColor="#2d0c98"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        FontFamily="Comfortaa"
+                        TranslationY="-9"
+                        Background="White"/>
+                    
+                </Grid>
+
+                <!--ввод пароля-->
+                <Grid
+                    x:Name="Grid3"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0, 15, 0, 0"
+                    IsVisible="False">
+                    
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Stroke="#2d0c98"
+                        StrokeThickness="2"
+                        StrokeShape="15"
+                        Padding="0"
+                        Margin="0, 0, 0, 10"
+                        HorizontalOptions="Fill">
+
+                        <Entry 
+                            Placeholder="Осуждаю"
+                            x:Name="Password"
+                            FontFamily="Comfortaa"
+                            Margin="10, 0, 10, 0"
+                            Keyboard="Numeric"
+/>
+
+                    </Border>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        Text=" Пароль "
+                        TextColor="#2d0c98"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        FontFamily="Comfortaa"
+                        TranslationY="-9"
+                        Background="White"/>
+                    
+                </Grid>
+
+            </Grid>
+            
+            <!--кнопки-->
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="Fill">
+
+                <Button
+                    x:Name="ReloadButton"
+                    IsVisible="True"
+                    ImageSource=""
+                    Opacity="0.5"
+                    Margin="0, 0, 20, 20"
+                    CornerRadius="15"
+                    HeightRequest="50"
+                    WidthRequest="50"/>
+                <Button
+                    x:Name="Button"
+                    IsEnabled="False"
+                    Text="Проверить"
+                    TextColor="White"
+                    FontFamily="Comfortaa"
+                    BackgroundColor="#2d0c98"
+                    CornerRadius="15"
+                    HeightRequest="50"
+                    HorizontalOptions="Fill"
+                    Clicked="EnterLoginNumber"
+                    Opacity="0.5"
+                    Margin="0, 0, 0, 20"/>
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
 
     </Grid>
 

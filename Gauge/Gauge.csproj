@@ -88,9 +88,6 @@
 	  <MauiXaml Update="Pages\LoginPages\PrivacyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LoginPages\RegistrationAnthropometricDataPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

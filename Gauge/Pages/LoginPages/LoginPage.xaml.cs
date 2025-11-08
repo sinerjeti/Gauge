@@ -1,35 +1,60 @@
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace Gauge.Pages.LoginPages;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage()
-    {
-		InitializeComponent();
-        do { NextButton.IsEnabled = false; }
-        while (LoginNumber == null);
-	}
 
-    private void OnTextChanged(object sender, TextChangedEventArgs e)
+    int huy = 0;
+
+    public LoginPage()
+    {
+        InitializeComponent();
+    }
+
+    private void ChangedLoginNumber(object sender, TextChangedEventArgs e)
     {
         if (!string.IsNullOrWhiteSpace(LoginNumber.Text))
         {
-            NextButton.IsEnabled = true;
-            NextButton.Opacity = 1;
+            Button.IsEnabled = true;
+            Button.Opacity = 1;
         }
         else
         {
-            NextButton.IsEnabled = false;
-            NextButton.Opacity = 0.5;
+            LoginBorder.Stroke = Color.FromArgb("#2d0c98");
+            LoginLabel.TextColor = Color.FromArgb("#2d0c98");
+            Button.IsEnabled = false;
+            Button.Opacity = 0.5;
         }
     }
 
-    private async void CheckUserExist(object sender, EventArgs e)
+    public async void EnterLoginNumber(object sender, EventArgs e)
     {
-        var phoneNumber = JsonSerializer.Serialize(LoginNumber.ToString());
-        HttpClient client = new HttpClient();
+        var number = LoginNumber.Text.ToString();
+        if (number.Length >= 11 && number.Length <= 15)
+        {
+            //тут будет проверка номера на сервере
+            Grid2.IsVisible = true;
+            LoginNumber.IsReadOnly = true;
+            LoginBorder.Stroke = Color.FromArgb("#2d0c98");
+            LoginLabel.TextColor = Color.FromArgb("#2d0c98");
+        }
+        else
+        {
+            LoginBorder.Stroke = Colors.Red;
+            LoginLabel.TextColor = Colors.Red;
+        }
+
     }
+
+
+    //private async void EnterLoginNumber() { }
+    //private async void EnterVerificationCode() { }
+    //private async void EnterPassword() { }
+    //private async void OnTextChanged() { }
 
     /*
     Короче. чел вводит номер телефона и вызывается эта функция. 
@@ -56,13 +81,4 @@ public partial class LoginPage : ContentPage
         оправляете его на страницу RegistrationPage
     */
 
-    private async void InLoginNextPage(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("RegistrationPage"); //for test
-    }
-
-    private void LoginNumber_TextChanged(object sender, TextChangedEventArgs e)
-    {
-
-    }
 }
