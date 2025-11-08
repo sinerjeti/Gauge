@@ -132,7 +132,7 @@
                             FontFamily="Comfortaa"
                             Margin="10, 0, 10, 0"
                             Keyboard="Numeric"
-/>
+                            MaxLength ="4"/>
 
                     </Border>
 
@@ -197,20 +197,24 @@
             </Grid>
             
             <!--кнопки-->
-            <HorizontalStackLayout
-                HorizontalOptions="Center"
-                VerticalOptions="Fill">
+            <Grid
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                ColumnDefinitions="auto, *">
 
                 <Button
+                    Grid.Column="0"
                     x:Name="ReloadButton"
-                    IsVisible="True"
-                    ImageSource=""
-                    Opacity="0.5"
+                    IsVisible="False"
+                    ImageSource="restarticon.png"
                     Margin="0, 0, 20, 20"
                     CornerRadius="15"
                     HeightRequest="50"
-                    WidthRequest="50"/>
+                    WidthRequest="50"
+                    BackgroundColor="#2d0c98"/>
+                
                 <Button
+                    Grid.Column="1"
                     x:Name="Button"
                     IsEnabled="False"
                     Text="Проверить"
@@ -224,7 +228,7 @@
                     Opacity="0.5"
                     Margin="0, 0, 0, 20"/>
 
-            </HorizontalStackLayout>
+            </Grid>
 
         </VerticalStackLayout>
 

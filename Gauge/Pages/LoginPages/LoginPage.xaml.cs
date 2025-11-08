@@ -41,6 +41,18 @@ public partial class LoginPage : ContentPage
             LoginNumber.IsReadOnly = true;
             LoginBorder.Stroke = Color.FromArgb("#2d0c98");
             LoginLabel.TextColor = Color.FromArgb("#2d0c98");
+            ReloadButton.IsVisible = true;
+            
+            /*
+            дальше идет проверка кода. оправляем введенный пользователем код на сервер для
+            проверки. 
+            * если код введен неправильный, надо будет label и border перекрасить в красный и
+              сделать такую же штучку, как и с первой строкой ввода. 
+            * если код введен правильный, анимация идет дальше.
+            еще надо сделать обработчик для кнопки ReloadButton. она ес че возвращает страницу
+            в первоначальное положение.
+            */
+
         }
         else
         {
