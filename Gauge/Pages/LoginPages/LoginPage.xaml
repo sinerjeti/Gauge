@@ -67,20 +67,22 @@
                     FontFamily="Comfortaa"
                     Margin="10, 0, 10, 0"
                     Keyboard="Numeric"
-                    Completed="InLoginNextPage"/>
+                    TextChanged="OnTextChanged"/>
                 <!--тут надо будет допилить анимку, ввод надо запретить, когда начнется анимка-->
 
             </Border>
 
-            <Button 
+            <Button
+                x:Name="NextButton"
                 Text="Далее"
                 TextColor="White"
                 FontFamily="Comfortaa"
                 BackgroundColor="#2d0c98"
-                CornerRadius="15" 
+                CornerRadius="15"
                 HeightRequest="50"
                 HorizontalOptions="Fill"
-                Clicked="InLoginNextPage"/>
+                Clicked="InLoginNextPage"
+                Opacity="0.5"/>
 
         </VerticalStackLayout>
 

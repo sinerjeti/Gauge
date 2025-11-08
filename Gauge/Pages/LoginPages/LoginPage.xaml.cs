@@ -1,11 +1,35 @@
+using System.Text.Json;
+
 namespace Gauge.Pages.LoginPages;
 
 public partial class LoginPage : ContentPage
 {
 	public LoginPage()
-	{
+    {
 		InitializeComponent();
+        do { NextButton.IsEnabled = false; }
+        while (LoginNumber == null);
 	}
+
+    private void OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(LoginNumber.Text))
+        {
+            NextButton.IsEnabled = true;
+            NextButton.Opacity = 1;
+        }
+        else
+        {
+            NextButton.IsEnabled = false;
+            NextButton.Opacity = 0.5;
+        }
+    }
+
+    private async void CheckUserExist(object sender, EventArgs e)
+    {
+        var phoneNumber = JsonSerializer.Serialize(LoginNumber.ToString());
+        HttpClient client = new HttpClient();
+    }
 
     /*
     Короче. чел вводит номер телефона и вызывается эта функция. 
@@ -37,4 +61,8 @@ public partial class LoginPage : ContentPage
         await Shell.Current.GoToAsync("RegistrationPage"); //for test
     }
 
+    private void LoginNumber_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+    }
 }
