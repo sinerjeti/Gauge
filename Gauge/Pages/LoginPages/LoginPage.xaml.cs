@@ -38,7 +38,7 @@ public partial class LoginPage : ContentPage
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient client = new HttpClient(clientHandler);
             PhoneNumberRequestDTO phoneNumber = new() { PhoneNumber = LoginNumber.Text };
-            using var response = await client.PostAsJsonAsync("https://172.17.224.1:443/user/checkuserexist", phoneNumber);
+            using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 await Navigation.PushModalAsync(new RegistrationPage());
