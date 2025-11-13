@@ -1,5 +1,7 @@
+using Gauge.DTOs;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -7,9 +9,6 @@ namespace Gauge.Pages.LoginPages;
 
 public partial class LoginPage : ContentPage
 {
-
-    int huy = 0;
-
     public LoginPage()
     {
         InitializeComponent();
@@ -17,7 +16,7 @@ public partial class LoginPage : ContentPage
 
     private void ChangedLoginNumber(object sender, TextChangedEventArgs e)
     {
-        if (!string.IsNullOrWhiteSpace(LoginNumber.Text))
+        if (LoginNumber.Text.Length == 18)
         {
             Button.IsEnabled = true;
             Button.Opacity = 1;
@@ -33,32 +32,40 @@ public partial class LoginPage : ContentPage
 
     public async void EnterLoginNumber(object sender, EventArgs e)
     {
-        var number = LoginNumber.Text.ToString();
-        if (number.Length >= 11 && number.Length <= 15)
+        try
         {
-            //тут будет проверка номера на сервере
-            Grid2.IsVisible = true;
-            LoginNumber.IsReadOnly = true;
-            LoginBorder.Stroke = Color.FromArgb("#2d0c98");
-            LoginLabel.TextColor = Color.FromArgb("#2d0c98");
-            ReloadButton.IsVisible = true;
-            
-            /*
-            дальше идет проверка кода. оправляем введенный пользователем код на сервер для
-            проверки. 
-            * если код введен неправильный, надо будет label и border перекрасить в красный и
-              сделать такую же штучку, как и с первой строкой ввода. 
-            * если код введен правильный, анимация идет дальше.
-            еще надо сделать обработчик для кнопки ReloadButton. она ес че возвращает страницу
-            в первоначальное положение.
-            */
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
+            PhoneNumberRequestDTO phoneNumber = new() { PhoneNumber = LoginNumber.Text };
+            using var response = await client.PostAsJsonAsync("https://172.17.224.1:443/user/checkuserexist", phoneNumber);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                await Navigation.PushModalAsync(new RegistrationPage());
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                Grid2.IsVisible = true;
+                LoginNumber.IsReadOnly = true;
+                LoginBorder.Stroke = Color.FromArgb("#2d0c98");
+                LoginLabel.TextColor = Color.FromArgb("#2d0c98");
+                ReloadButton.IsVisible = true;
+            }
+        }
+        catch (Exception)
+        {
+            await DisplayAlertAsync("Error", "Error, bro", "OK");
+        }
 
-        }
-        else
-        {
-            LoginBorder.Stroke = Colors.Red;
-            LoginLabel.TextColor = Colors.Red;
-        }
+        /*
+        дальше идет проверка кода. оправляем введенный пользователем код на сервер для
+        проверки. 
+        * если код введен неправильный, надо будет label и border перекрасить в красный и
+          сделать такую же штучку, как и с первой строкой ввода. 
+        * если код введен правильный, анимация идет дальше.
+        еще надо сделать обработчик для кнопки ReloadButton. она ес че возвращает страницу
+        в первоначальное положение.
+        */
 
     }
 
