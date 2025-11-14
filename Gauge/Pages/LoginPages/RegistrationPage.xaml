@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:lp="clr-namespace:Gauge.Pages.LoginPages"
              x:Class="Gauge.Pages.LoginPages.RegistrationPage"
              BackgroundColor="White"
              Shell.NavBarIsVisible="False">
@@ -32,8 +31,7 @@
                 FontFamily="Comfortaa"/>
 
             <Label
-                x:Name="PhoneNumberLabel"
-                Text=""
+                Text="бубубу"
                 HorizontalOptions="Center"
                 FontSize="14"
                 FontAttributes="Bold"
@@ -215,8 +213,7 @@
                 
                 <CheckBox 
                     x:Name="AgreementCheckBox"
-                    Color="#2d0c98"
-                    CheckedChanged="AgreementAndPrivacyCheckBox_CheckedChanged"/>
+                    Color="#2d0c98"/>
 
                 <Label 
                     VerticalOptions="Center"
@@ -266,8 +263,7 @@
             <HorizontalStackLayout>
                 <CheckBox 
                     x:Name="PrivacyCheckBox"
-                    Color="#2d0c98"
-                    CheckedChanged="AgreementAndPrivacyCheckBox_CheckedChanged"/>
+                    Color="#2d0c98"/>
 
                 <Label
                     VerticalOptions="Center"
@@ -315,9 +311,6 @@
 
             <!--кнопка в конце-->
             <Button
-                x:Name="NextButton"
-                IsEnabled="False"
-                Opacity="0.5"
                 Text="Далее"
                 TextColor="White"
                 FontFamily="Comfortaa"

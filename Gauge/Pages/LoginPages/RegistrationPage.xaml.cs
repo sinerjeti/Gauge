@@ -1,13 +1,10 @@
-using CommunityToolkit.Maui.Markup;
-
 namespace Gauge.Pages.LoginPages;
 
 public partial class RegistrationPage : ContentPage
 {
-	public RegistrationPage(string phoneNumber)
+	public RegistrationPage()
 	{
 		InitializeComponent();
-        PhoneNumberLabel.Text = phoneNumber;
 	}
 
     /*
@@ -20,10 +17,9 @@ public partial class RegistrationPage : ContentPage
     3. естественно если чел не введет все данные и не нажмет все флажки, на некст страницу его пускать нальзя
     */
 
-	private async void RegisterUser(object sender, EventArgs e)
+	private async void InRegistrationNextPage(object sender, EventArgs e)
 	{
-
-        await Shell.Current.GoToAsync("RegistrationAnthropometricDataPage");
+        await Shell.Current.GoToAsync("RegistrationAnthropometricDataPage"); //for test
     }
 
     /*
@@ -49,20 +45,5 @@ public partial class RegistrationPage : ContentPage
     private async void TapPrivacyCheckBoxPage(object sender, TappedEventArgs e)
     {
         await Shell.Current.GoToAsync("PrivacyPage");
-    }
-
-    //событие, которое проверяет, чтобы были нажаты оба флажка, а только после этого оно разблокирует кнопку "далее "
-    private void AgreementAndPrivacyCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        if (AgreementCheckBox.IsChecked == true && PrivacyCheckBox.IsChecked == true)
-        {
-            NextButton.IsEnabled = true;
-            NextButton.Opacity = 1;
-        }
-        else
-        {
-            NextButton.IsEnabled = false;
-            NextButton.Opacity = 0.5;
-        }
     }
 }

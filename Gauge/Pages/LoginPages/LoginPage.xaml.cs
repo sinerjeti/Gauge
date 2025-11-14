@@ -3,6 +3,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 namespace Gauge.Pages.LoginPages;
@@ -41,20 +42,22 @@ public partial class LoginPage : ContentPage
             using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                await Navigation.PushModalAsync(new RegistrationPage(LoginNumber.Text));
+                await Navigation.PushModalAsync(new RegistrationPage());
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                Grid2.IsVisible = true;
+                Grid3.IsVisible = true;
                 LoginNumber.IsReadOnly = true;
                 LoginBorder.Stroke = Color.FromArgb("#2d0c98");
                 LoginLabel.TextColor = Color.FromArgb("#2d0c98");
                 ReloadButton.IsVisible = true;
+                Button.Clicked -= EnterLoginNumber;
+                Button.Clicked += CheckPassword;
             }
         }
-        catch (Exception)
+        catch (Exception exp)
         {
-            await DisplayAlertAsync("Error", "Error, bro", "OK");
+            await DisplayAlertAsync("Error", $"{exp}", "OK");
         }
 
         /*
@@ -68,6 +71,37 @@ public partial class LoginPage : ContentPage
         */
 
     }
+    
+    public async void CheckPassword(object sender, EventArgs e)
+    {
+        try
+        {
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
+
+            CheckPasswordRequestDTO checkPasswordRequest = new() { 
+                PhoneNumber = LoginNumber.Text,
+                Password = Password.Text 
+            };
+
+            using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkpassword", checkPasswordRequest);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlertAsync("Успех", "Пароль верный!", "OK");
+            }
+            else
+            {
+                await DisplayAlertAsync("Ошибка", "Неверный пароль!", "OK");
+            }
+        }
+        catch (Exception exp)
+        {
+            await DisplayAlertAsync("Ошибка", $"Произошла ошибка: {exp.Message}", "OK");
+        }
+    }
+
 
 
     //private async void EnterLoginNumber() { }
