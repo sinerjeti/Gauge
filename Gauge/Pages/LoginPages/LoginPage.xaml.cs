@@ -41,7 +41,7 @@ public partial class LoginPage : ContentPage
             using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                await Navigation.PushModalAsync(new RegistrationPage());
+                await Navigation.PushModalAsync(new RegistrationPage(LoginNumber.Text));
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
