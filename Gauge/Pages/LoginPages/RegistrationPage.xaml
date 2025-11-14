@@ -213,7 +213,8 @@
                 
                 <CheckBox 
                     x:Name="AgreementCheckBox"
-                    Color="#2d0c98"/>
+                    Color="#2d0c98"
+                    CheckedChanged="AgreementCheckBox_CheckedChanged"/>
 
                 <Label 
                     VerticalOptions="Center"
@@ -263,7 +264,8 @@
             <HorizontalStackLayout>
                 <CheckBox 
                     x:Name="PrivacyCheckBox"
-                    Color="#2d0c98"/>
+                    Color="#2d0c98"
+                    CheckedChanged="AgreementCheckBox_CheckedChanged"/>
 
                 <Label
                     VerticalOptions="Center"
@@ -311,7 +313,10 @@
 
             <!--кнопка в конце-->
             <Button
+                x:Name="Huynya_knopka"
                 Text="Далее"
+                IsEnabled="False"
+                Opacity="0.5"
                 TextColor="White"
                 FontFamily="Comfortaa"
                 BackgroundColor="#2d0c98"

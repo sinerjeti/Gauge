@@ -46,4 +46,19 @@ public partial class RegistrationPage : ContentPage
     {
         await Shell.Current.GoToAsync("PrivacyPage");
     }
+
+    private void AgreementCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        if (AgreementCheckBox.IsChecked == true && PrivacyCheckBox.IsChecked == true)
+        {
+            Huynya_knopka.Opacity = 1;
+            Huynya_knopka.IsEnabled = true;
+        }
+        else
+        {
+            Huynya_knopka.Opacity = 0.5;
+            Huynya_knopka.IsEnabled = false;
+        }
+    }
+
 }

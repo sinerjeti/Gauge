@@ -181,8 +181,7 @@
                             x:Name="Password"
                             FontFamily="Comfortaa"
                             Margin="10, 0, 10, 0"
-                            Keyboard="Numeric"
-/>
+                            Keyboard="Password"/>
 
                     </Border>
 
