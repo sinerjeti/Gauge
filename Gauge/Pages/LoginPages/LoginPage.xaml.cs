@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
+using WebApiForGauge.Models;
 
 namespace Gauge.Pages.LoginPages;
 
@@ -35,6 +36,8 @@ public partial class LoginPage : ContentPage
     {
         try
         {
+            Button.Opacity = 0.5;
+            Button.IsEnabled = true;
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient client = new HttpClient(clientHandler);
@@ -53,6 +56,8 @@ public partial class LoginPage : ContentPage
                 ReloadButton.IsVisible = true;
                 Button.Clicked -= EnterLoginNumber;
                 Button.Clicked += CheckPassword;
+                Button.IsEnabled = true;
+                Button.Opacity = 1;
             }
         }
         catch (Exception exp)
@@ -103,6 +108,36 @@ public partial class LoginPage : ContentPage
     }
 
 
+    public async void CheckPassword(object sender, EventArgs e)
+    {
+        try
+        {
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
+
+            CheckPasswordRequestDTO checkPasswordRequest = new()
+            {
+                PhoneNumber = LoginNumber.Text,
+                Password = Password.Text
+            };
+
+            using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkpassword", checkPasswordRequest);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlertAsync("Успех", "Пароль верный!", "OK");
+            }
+            else
+            {
+                await DisplayAlertAsync("Ошибка", "Неверный пароль!", "OK");
+            }
+        }
+        catch (Exception exp)
+        {
+            await DisplayAlertAsync("Ошибка", $"Произошла ошибка: {exp.Message}", "OK");
+        }
+    }
 
     //private async void EnterLoginNumber() { }
     //private async void EnterVerificationCode() { }
