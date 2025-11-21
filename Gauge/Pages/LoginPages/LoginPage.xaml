@@ -12,7 +12,7 @@
         ColumnDefinitions="*"
         HorizontalOptions="Fill" 
         VerticalOptions="Fill" 
-        Padding="20, 0, 20, 0">
+        Padding="10, 0, 10, 0">
 
         <!--верх-->
         <VerticalStackLayout
@@ -57,16 +57,17 @@
             x:Name="BottomContent"
             Grid.Row="1"
             Grid.Column="0"
-            Spacing="15" 
+            Spacing="0" 
             HorizontalOptions="Fill" 
             VerticalOptions="End">
             
             <!--строки ввода-->
             <Grid
-                RowDefinitions="Auto, Auto, Auto"
+                RowDefinitions="Auto, 0, Auto"
                 ColumnDefinitions="*"
                 HorizontalOptions="Fill"
-                Margin="0, 0, 0, 0">
+                Margin="0, 0, 0, 0"
+                RowSpacing="0">
 
                 <!--ввод номера-->
                 <Grid
@@ -74,7 +75,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     IsVisible="True"
-                    Margin="0, 15, 0, 0">
+                    Margin="0, 0, 0, 0">
                     
                     <Border
                         x:Name="LoginBorder"
@@ -82,7 +83,7 @@
                         StrokeThickness="2"
                         StrokeShape="15"
                         Padding="0"
-                        Margin="0, 0, 0, 10"
+                        Margin="0, 0, 0, 15"
                         HorizontalOptions="Fill">
 
                         <Entry 
@@ -163,17 +164,18 @@
                     x:Name="Grid3"
                     Grid.Row="2"
                     Grid.Column="0"
-                    Margin="0, 15, 0, 0"
+                    Margin="0, 0, 0, 0"
                     IsVisible="False">
                     
                     <Border
+                        x:Name="PasswordBorder"
                         Grid.Row="0"
                         Grid.Column="0"
                         Stroke="#2d0c98"
                         StrokeThickness="2"
                         StrokeShape="15"
                         Padding="0"
-                        Margin="0, 0, 0, 10"
+                        Margin="0, 0, 0, 15"
                         HorizontalOptions="Fill">
 
                         <Entry 

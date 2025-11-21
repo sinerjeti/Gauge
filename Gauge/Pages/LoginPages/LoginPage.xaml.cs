@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Markup;
 using Gauge.DTOs;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
@@ -49,6 +50,9 @@ public partial class LoginPage : ContentPage
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                await Grid1.TranslateToAsync(0, -55, 500, Easing.SinIn);
+                Grid1.TranslationY = 0;
+                Grid1.Margin = new(0, 55, 0, 0);
                 Grid3.IsVisible = true;
                 LoginNumber.IsReadOnly = true;
                 LoginBorder.Stroke = Color.FromArgb("#2d0c98");
