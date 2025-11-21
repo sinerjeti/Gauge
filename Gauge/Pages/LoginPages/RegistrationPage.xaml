@@ -31,6 +31,7 @@
                 FontFamily="Comfortaa"/>
 
             <Label
+                x:Name="UserPhoneNumber"
                 Text="бубубу"
                 HorizontalOptions="Center"
                 FontSize="14"
@@ -52,6 +53,7 @@
 
             <!--first stroke-->
             <Border
+                x:Name="UserNameBorder"
                 Grid.Row="0"
                 Grid.Column="0"
                 Stroke="#2d0c98"
@@ -66,7 +68,8 @@
                     x:Name="NewUserName"
                     FontFamily="Comfortaa"
                     Margin="10, 0, 10, 0"
-                    Keyboard="Text"/>
+                    Keyboard="Text"
+                    Completed="NewUserName_Completed"/>
 
             </Border>
             
@@ -135,7 +138,7 @@
 
                     <DatePicker
                         x:Name="NewDate"
-                        Format="dd.MM.yyyy"
+                        Format="d"
                         Margin="40, 0, 40, 0"
                         FontFamily="Comfortaa"/>
 
@@ -313,7 +316,7 @@
 
             <!--кнопка в конце-->
             <Button
-                x:Name="Huynya_knopka"
+                x:Name="RegisterButton"
                 Text="Далее"
                 IsEnabled="False"
                 Opacity="0.5"
@@ -325,7 +328,19 @@
                 HorizontalOptions="Fill"
                 VerticalOptions="End"
                 Margin="0, 12.5, 0, 20"
-                Clicked="InRegistrationNextPage"/>
+                Clicked="InRegistrationNextPage">
+                <Button.Triggers>
+                    <MultiTrigger TargetType="Button">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Source={x:Reference AgreementCheckBox}, Path=ClassId}" Value="Valid"/>
+                            <BindingCondition Binding="{Binding Source={x:Reference PrivacyCheckBox}, Path=ClassId}" Value="Valid"/>
+                            <BindingCondition Binding="{Binding Source={x:Reference UserNameBorder}, Path=ClassId}" Value="Valid"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Setter Property="Opacity" Value="1"/>
+                    </MultiTrigger>
+                </Button.Triggers>
+            </Button>
 
         </VerticalStackLayout>
         

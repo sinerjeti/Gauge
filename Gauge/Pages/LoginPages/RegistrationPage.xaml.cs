@@ -1,10 +1,14 @@
+using Gauge.DTOs;
+using System.Net.Http.Json;
+
 namespace Gauge.Pages.LoginPages;
 
 public partial class RegistrationPage : ContentPage
 {
-	public RegistrationPage()
+	public RegistrationPage(string phoneNumber)
 	{
 		InitializeComponent();
+        UserPhoneNumber.Text = phoneNumber;
 	}
 
     /*
@@ -19,7 +23,24 @@ public partial class RegistrationPage : ContentPage
 
 	private async void InRegistrationNextPage(object sender, EventArgs e)
 	{
-        await Shell.Current.GoToAsync("RegistrationAnthropometricDataPage"); //for test
+        HttpClient client = new HttpClient();
+        RegisterUserDTO newUser = new()
+        {
+            Username = NewUserName.Text,
+            PhoneNumber = UserPhoneNumber.Text,
+            Password = NewUserPassword.Text,
+            Birthday = NewDate.Date.ToString()
+        };
+        using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/createuser", newUser);
+        if (response.StatusCode != System.Net.HttpStatusCode.OK)
+        {
+            await DisplayAlertAsync("error", "damn bro, it`s error", "OK");
+            return;
+        }
+        else
+        {
+            await DisplayAlertAsync("victory", "next page coming soon been here", "chechnya cool");
+        }
     }
 
     /*
@@ -27,15 +48,15 @@ public partial class RegistrationPage : ContentPage
     переход на страницу с политикой или пользовательским соглашением
     */
 
-    private void TapAgreementCheckBoxText(object sender, TappedEventArgs e)
-    {
-        AgreementCheckBox.IsChecked = !AgreementCheckBox.IsChecked;
-    }
+    //private void TapAgreementCheckBoxText(object sender, TappedEventArgs e)
+    //{
+    //    AgreementCheckBox.IsChecked = !AgreementCheckBox.IsChecked;
+    //}
 
-    private void TapPrivacyCheckBoxText(object sender, TappedEventArgs e)
-    {
-        PrivacyCheckBox.IsChecked = !PrivacyCheckBox.IsChecked;
-    }
+    //private void TapPrivacyCheckBoxText(object sender, TappedEventArgs e)
+    //{
+    //    PrivacyCheckBox.IsChecked = !PrivacyCheckBox.IsChecked;
+    //}
 
     private async void TapAgreementCheckBoxPage(object sender, TappedEventArgs e)
     {
@@ -51,14 +72,31 @@ public partial class RegistrationPage : ContentPage
     {
         if (AgreementCheckBox.IsChecked == true && PrivacyCheckBox.IsChecked == true)
         {
-            Huynya_knopka.Opacity = 1;
-            Huynya_knopka.IsEnabled = true;
+            AgreementCheckBox.ClassId = "Valid";
+            PrivacyCheckBox.ClassId = "Valid";
         }
         else
         {
-            Huynya_knopka.Opacity = 0.5;
-            Huynya_knopka.IsEnabled = false;
+            AgreementCheckBox.ClassId = "Invalid";
+            PrivacyCheckBox.ClassId = "Invalid";
         }
     }
 
+
+    private async void NewUserName_Completed(object sender, EventArgs e)
+    {
+        HttpClient client = new HttpClient();
+        CheckUsernameDTO username = new() { Username = NewUserName.Text };
+        using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkusername", username);
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            UserNameBorder.Stroke = Color.FromRgb(0, 255, 0);
+            UserNameBorder.ClassId = "Valid";
+        }
+        else
+        {
+            UserNameBorder.ClassId = "Invalid";
+            UserNameBorder.Stroke = Color.FromRgb(255, 0, 0);
+        }
+    }
 }

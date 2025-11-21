@@ -1,11 +1,5 @@
-using CommunityToolkit.Maui.Markup;
 using Gauge.DTOs;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
 using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
 using WebApiForGauge.Models;
 
 namespace Gauge.Pages.LoginPages;
@@ -46,7 +40,7 @@ public partial class LoginPage : ContentPage
             using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                await Navigation.PushModalAsync(new RegistrationPage());
+                await Navigation.PushModalAsync(new RegistrationPage(LoginNumber.Text));
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
@@ -60,8 +54,8 @@ public partial class LoginPage : ContentPage
                 ReloadButton.IsVisible = true;
                 Button.Clicked -= EnterLoginNumber;
                 Button.Clicked += CheckPassword;
-                Button.IsEnabled = true;
-                Button.Opacity = 1;
+                Button.IsEnabled = false;
+                Button.Opacity = 0.5;
             }
         }
         catch (Exception exp)
