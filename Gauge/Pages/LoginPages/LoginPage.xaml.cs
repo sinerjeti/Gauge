@@ -6,6 +6,7 @@ namespace Gauge.Pages.LoginPages;
 
 public partial class LoginPage : ContentPage
 {
+    private static readonly HttpClient _httpClient = new HttpClient();
     public LoginPage()
     {
         InitializeComponent();
@@ -29,15 +30,18 @@ public partial class LoginPage : ContentPage
 
     public async void EnterLoginNumber(object sender, EventArgs e)
     {
+        if(Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+        {
+            await DisplayAlertAsync("error", "Отсутствует подключение к интернету!", "OK");
+            return;
+        }
+
         try
         {
             Button.Opacity = 0.5;
             Button.IsEnabled = true;
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            HttpClient client = new HttpClient(clientHandler);
             PhoneNumberRequestDTO phoneNumber = new() { PhoneNumber = LoginNumber.Text };
-            using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
+            using var response = await _httpClient.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 await Navigation.PushModalAsync(new RegistrationPage(LoginNumber.Text));
@@ -46,7 +50,7 @@ public partial class LoginPage : ContentPage
             {
                 await Grid1.TranslateToAsync(0, -55, 500, Easing.SinIn);
                 Grid1.TranslationY = 0;
-                Grid1.Margin = new(0, 55, 0, 0);
+                Grid1.Margin = new(0, -55, 0, 0);
                 Grid3.IsVisible = true;
                 LoginNumber.IsReadOnly = true;
                 LoginBorder.Stroke = Color.FromArgb("#2d0c98");
@@ -58,9 +62,9 @@ public partial class LoginPage : ContentPage
                 Button.Opacity = 0.5;
             }
         }
-        catch (Exception exp)
+        catch (Exception)
         {
-            await DisplayAlertAsync("Error", $"{exp}", "OK");
+            await DisplayAlertAsync("Error", $"ошибка выполнения", "OK");
         }
 
         /*
@@ -77,62 +81,49 @@ public partial class LoginPage : ContentPage
     
     public async void CheckPassword(object sender, EventArgs e)
     {
-        try
+        if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
         {
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            HttpClient client = new HttpClient(clientHandler);
-
-            CheckPasswordRequestDTO checkPasswordRequest = new() { 
-                PhoneNumber = LoginNumber.Text,
-                Password = Password.Text 
-            };
-
-            using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkpassword", checkPasswordRequest);
-
-            if (response.IsSuccessStatusCode)
-            {
-                await DisplayAlertAsync("Успех", "Пароль верный!", "OK");
-            }
-            else
-            {
-                await DisplayAlertAsync("Ошибка", "Неверный пароль!", "OK");
-            }
+            await DisplayAlertAsync("error", "Отсутствует подключение к интернету!", "OK");
+            return;
         }
-        catch (Exception exp)
+
+        CheckPasswordRequestDTO checkPasswordRequest = new() 
+        { 
+            PhoneNumber = LoginNumber.Text,
+            Password = Password.Text 
+        };
+
+        using var response = await _httpClient.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkpassword", checkPasswordRequest);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            await DisplayAlertAsync("Ошибка", $"Произошла ошибка: {exp.Message}", "OK");
+            await DisplayAlertAsync("Успех", "Пароль верный!", "OK");
+            //вместо этого переход на другую страницу, когда Захар её оформит
+        }
+        else if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+        {
+            await DisplayAlertAsync("error", $"Ошибка с нашей стороны\nУже устраняем её!", "OK");
+        }
+        else if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+        {
+            await DisplayAlertAsync("error", "На данный момент сервер недоступен", "ОК");
+        }
+        else
+        {
+            await DisplayAlertAsync("Ошибка", "Произошла ошибка", "OK");
         }
     }
 
-    //private async void EnterLoginNumber() { }
-    //private async void EnterVerificationCode() { }
-    //private async void EnterPassword() { }
-    //private async void OnTextChanged() { }
-
-    /*
-    Короче. чел вводит номер телефона и вызывается эта функция. 
-    Скорее всего это должен быть класс, потому что тут должно быть несколько функций.
-    1. проверка номера на подленность. 
-        * если чел нихуя не ввел, надо вывести что-то типо ошибки.
-        * если чел ввел неправильный номер (больше 11-ти символов или вообще нахуй буквы)
-          надо тоже сказать, чтобы норм номер ввел. 
-        * естественно тут понадобится сразу преобразовать номер, на случай, если чел додумается
-          вводить номер ТАК блять: 
-            +7 (905) 717-84-40 //ну типо правильный короче
-        преобразовать номер нужно потому, что мы решили избавиться от почты, оставить только
-        регистрацию по номеру.
-    2. отправка номера на сервер для проверки, есть ли он в базе данных или нет.
-        * тут ты отправляешь на сервер запрос с проверкой есть ли этот номер в базе или нет.
-          пока это все происходит, я какую-нибудь анимку добавлю и заебок будет.
-        * если же у типа нет инета и запросы к серверу не идут, надо будет ему тоже собщение с
-          ошибкой вывести что инета нет.
-    3.1 если номер был найден, на телефон пользователя будет отправлен проверочный код. должна
-        быть анимация подъема строки с вводом номера чуть выше, а на ее место придти новая
-        строка с вводом кода. после успешного ввода кода появится третья строка с вводом пароля,
-        а уже после переход на основную страницу. 
-    3.2 если номер не был найден, но он правильный, значит чела надо зарегистрировать. 
-        оправляете его на страницу RegistrationPage
-    */
-
+    private async void ReloadButton_Clicked(object sender, EventArgs e)
+    {
+        ReloadButton.IsVisible = false;
+        Grid3.IsVisible = false;
+        Grid1.TranslationY = -57;
+        await Grid1.TranslateToAsync(0, 9, 500, Easing.SinIn);
+        Grid1.TranslationY = 0;
+        Grid1.Margin = new(0, 0, 0, 0);
+        LoginNumber.Text = string.Empty;
+        LoginNumber.IsReadOnly = false;
+        Password.Text = string.Empty;
+    }
 }

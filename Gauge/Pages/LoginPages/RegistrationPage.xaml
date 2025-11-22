@@ -68,7 +68,7 @@
                     x:Name="NewUserName"
                     FontFamily="Comfortaa"
                     Margin="10, 0, 10, 0"
-                    Keyboard="Text"
+                    Keyboard="Default"
                     Completed="NewUserName_Completed"/>
 
             </Border>
@@ -101,7 +101,8 @@
                     x:Name="NewUserPassword"
                     FontFamily="Comfortaa"
                     Margin="10, 0, 10, 0"
-                    Keyboard="Password"/>
+                    Keyboard="Password"
+                    TextChanged="NewUserPassword_TextChanged"/>
 
             </Border>
 
@@ -138,9 +139,10 @@
 
                     <DatePicker
                         x:Name="NewDate"
-                        Format="d"
+                        Format="dd.MM.yyyy"
                         Margin="40, 0, 40, 0"
-                        FontFamily="Comfortaa"/>
+                        FontFamily="Comfortaa"
+                        DateSelected="NewDate_DateSelected"/>
 
                 </Border>
 
@@ -174,7 +176,8 @@
                     FontFamily="Comfortaa"
                     VerticalOptions="Center"
                     Margin="10, 0, 10, 0"
-                    BackgroundColor="Transparent">
+                    BackgroundColor="Transparent"
+                    PropertyChanged="NewUserGender_PropertyChanged">
 
                         <Picker.Items>
 
@@ -234,7 +237,7 @@
                                 
                                 <Span.GestureRecognizers>
 
-                                    <TapGestureRecognizer Tapped="TapAgreementCheckBoxText"/>
+                                    <TapGestureRecognizer Tapped="TapAgreementCheckBoxPage"/>
                                     
                                 </Span.GestureRecognizers>
                                 
@@ -335,6 +338,9 @@
                             <BindingCondition Binding="{Binding Source={x:Reference AgreementCheckBox}, Path=ClassId}" Value="Valid"/>
                             <BindingCondition Binding="{Binding Source={x:Reference PrivacyCheckBox}, Path=ClassId}" Value="Valid"/>
                             <BindingCondition Binding="{Binding Source={x:Reference UserNameBorder}, Path=ClassId}" Value="Valid"/>
+                            <BindingCondition Binding="{Binding Source={x:Reference NewUserPassword}, Path=ClassId}" Value="Valid"/>
+                            <BindingCondition Binding="{Binding Source={x:Reference NewUserGender}, Path=ClassId}" Value="Valid"/>
+                            <BindingCondition Binding="{Binding Source={x:Reference NewDate}, Path=ClassId}" Value="Valid"/>
                         </MultiTrigger.Conditions>
                         <Setter Property="IsEnabled" Value="True"/>
                         <Setter Property="Opacity" Value="1"/>

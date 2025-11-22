@@ -1,4 +1,4 @@
 ﻿[*.cs]
 
-# CS8601: Возможно, назначение-ссылка, допускающее значение NULL.
-dotnet_diagnostic.CS8601.severity = none
+# CS8629: Тип значения, допускающего NULL, может быть NULL.
+dotnet_diagnostic.CS8629.severity = none

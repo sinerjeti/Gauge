@@ -95,11 +95,9 @@
                             Completed="EnterLoginNumber"
                             TextChanged="ChangedLoginNumber">
                             <Entry.Behaviors>
-                            <mct:MaskedBehavior Mask= "+X (XXX) XXX-XX-XX" UnmaskedCharacter="X"/>
+                                <mct:MaskedBehavior Mask= "+X (XXX) XXX-XX-XX" UnmaskedCharacter="X"/>
                             </Entry.Behaviors>
                         </Entry>
-
-
                     </Border>
 
                     <Label
@@ -113,7 +111,6 @@
                         FontFamily="Comfortaa"
                         TranslationY="-9"
                         Background="White"/>
-                    
                 </Grid>
                 
                 <!--ввод проверочного кода-->
@@ -219,7 +216,8 @@
                     CornerRadius="15"
                     HeightRequest="50"
                     WidthRequest="50"
-                    BackgroundColor="#2d0c98"/>
+                    BackgroundColor="#2d0c98"
+                    Clicked="ReloadButton_Clicked"/>
                 
                 <Button
                     Grid.Column="1"

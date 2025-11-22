@@ -5,7 +5,9 @@ namespace Gauge.Pages.LoginPages;
 
 public partial class RegistrationPage : ContentPage
 {
-	public RegistrationPage(string phoneNumber)
+    private static readonly HttpClient _httpClient = new HttpClient();
+
+    public RegistrationPage(string phoneNumber)
 	{
 		InitializeComponent();
         UserPhoneNumber.Text = phoneNumber;
@@ -15,48 +17,40 @@ public partial class RegistrationPage : ContentPage
     1. Ќу собственно. сверху страницы далжна быть анимаци€. по моим выдумкам у нас круто смотритс€ этот челик
        черный, поэтому € хочу его сделать лицом вашего приложени€. конкретно тут этот чел должен делать вид,
        типо записывает информацию пользовател€ на листок бумаги. хз, как вам, но как по мне, смотритс€ ахуенно.
-
-    2. получаете от чела данные, записываете и на сервер - все по классике.
-
-    3. естественно если чел не введет все данные и не нажмет все флажки, на некст страницу его пускать нальз€
     */
 
 	private async void InRegistrationNextPage(object sender, EventArgs e)
 	{
-        HttpClient client = new HttpClient();
-        RegisterUserDTO newUser = new()
+        RegisterButton.IsEnabled = false;
+        RegisterButton.Opacity = 0.5;
+        try
         {
-            Username = NewUserName.Text,
-            PhoneNumber = UserPhoneNumber.Text,
-            Password = NewUserPassword.Text,
-            Birthday = NewDate.Date.ToString()
-        };
-        using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/createuser", newUser);
-        if (response.StatusCode != System.Net.HttpStatusCode.OK)
-        {
-            await DisplayAlertAsync("error", "damn bro, it`s error", "OK");
-            return;
+            RegisterUserDTO newUser = new()
+            {
+                Username = NewUserName.Text,
+                PhoneNumber = UserPhoneNumber.Text,
+                Password = NewUserPassword.Text,
+                Birthday = DateOnly.FromDateTime((DateTime)NewDate.Date).ToString()
+            };
+            using var response = await _httpClient.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/createuser", newUser);
+            if (response.StatusCode != System.Net.HttpStatusCode.Created)
+            {
+                await DisplayAlertAsync("error", "damn bro, it`s error", "OK");
+                RegisterButton.IsEnabled = true;
+                RegisterButton.Opacity = 1;
+            }
+            else
+            {
+                await DisplayAlertAsync("victory", "next page coming soon been here", "chechnya cool");
+            }
         }
-        else
+        catch (Exception)
         {
-            await DisplayAlertAsync("victory", "next page coming soon been here", "chechnya cool");
+            await DisplayAlertAsync("erroe", "unknown error was catched", "OK");
+            RegisterButton.IsEnabled = true;
+            RegisterButton.Opacity = 1;
         }
     }
-
-    /*
-    чисто дл€ красоты. если чел нажимает на простой текст, галочка нажимаетс€, если на выделенный -
-    переход на страницу с политикой или пользовательским соглашением
-    */
-
-    //private void TapAgreementCheckBoxText(object sender, TappedEventArgs e)
-    //{
-    //    AgreementCheckBox.IsChecked = !AgreementCheckBox.IsChecked;
-    //}
-
-    //private void TapPrivacyCheckBoxText(object sender, TappedEventArgs e)
-    //{
-    //    PrivacyCheckBox.IsChecked = !PrivacyCheckBox.IsChecked;
-    //}
 
     private async void TapAgreementCheckBoxPage(object sender, TappedEventArgs e)
     {
@@ -77,17 +71,16 @@ public partial class RegistrationPage : ContentPage
         }
         else
         {
-            AgreementCheckBox.ClassId = "Invalid";
-            PrivacyCheckBox.ClassId = "Invalid";
+            AgreementCheckBox.ClassId = "";
+            PrivacyCheckBox.ClassId = "";
         }
     }
 
 
     private async void NewUserName_Completed(object sender, EventArgs e)
     {
-        HttpClient client = new HttpClient();
         CheckUsernameDTO username = new() { Username = NewUserName.Text };
-        using var response = await client.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkusername", username);
+        using var response = await _httpClient.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkusername", username);
         if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
             UserNameBorder.Stroke = Color.FromRgb(0, 255, 0);
@@ -95,8 +88,23 @@ public partial class RegistrationPage : ContentPage
         }
         else
         {
-            UserNameBorder.ClassId = "Invalid";
             UserNameBorder.Stroke = Color.FromRgb(255, 0, 0);
+            UserNameBorder.ClassId = "";
         }
+    }
+
+    private void NewUserPassword_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (NewUserPassword.Text.Length >= 6) NewUserPassword.ClassId = "Valid";
+    }
+
+    private void NewUserGender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (NewUserGender.SelectedItem != null) NewUserGender.ClassId = "Valid"; 
+    }
+
+    private void NewDate_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        if (NewDate.Date != null) NewDate.ClassId = "Valid";
     }
 }
