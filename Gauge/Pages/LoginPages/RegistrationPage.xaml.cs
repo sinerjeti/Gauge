@@ -98,7 +98,10 @@ public partial class RegistrationPage : ContentPage
         if (NewUserPassword.Text.Length >= 6) NewUserPassword.ClassId = "Valid";
     }
 
-
+    private void NewUserGender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (NewUserGender.SelectedIndex != -1) NewUserGender.ClassId = "Valid";
+    }
 
     private void NewDate_DateSelected(object sender, DateChangedEventArgs e)
     {
