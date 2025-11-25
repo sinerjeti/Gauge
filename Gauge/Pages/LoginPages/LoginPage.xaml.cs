@@ -21,8 +21,8 @@ public partial class LoginPage : ContentPage
         }
         else
         {
-            LoginBorder.Stroke = Color.FromArgb("#2d0c98");
-            LoginLabel.TextColor = Color.FromArgb("#2d0c98");
+            LoginBorder.Stroke = Color.FromArgb("#6134f0");
+            LoginLabel.TextColor = Color.FromArgb("#6134f0");
             Button.IsEnabled = false;
             Button.Opacity = 0.5;
         }
@@ -53,8 +53,8 @@ public partial class LoginPage : ContentPage
                 Grid1.Margin = new(0, -55, 0, 0);
                 Grid3.IsVisible = true;
                 LoginNumber.IsReadOnly = true;
-                LoginBorder.Stroke = Color.FromArgb("#2d0c98");
-                LoginLabel.TextColor = Color.FromArgb("#2d0c98");
+                LoginBorder.Stroke = Color.FromArgb("#6134f0");
+                LoginLabel.TextColor = Color.FromArgb("#6134f0");
                 ReloadButton.IsVisible = true;
                 Button.Clicked -= EnterLoginNumber;
                 Button.Clicked += CheckPassword;

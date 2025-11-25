@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gauge.Pages.LoginPages.RegistrationPage"
-             BackgroundColor="White"
+             Background="{AppThemeBinding Dark = #1c1c1c, Light = White}"
              Shell.NavBarIsVisible="False">
 
     <Grid
@@ -16,7 +16,7 @@
         <VerticalStackLayout
             Grid.Row="0"
             Grid.Column="0"
-            HorizontalOptions="Center">
+            HorizontalOptions="Fill">
 
             <Image
                 Source="animka.png"
@@ -32,12 +32,17 @@
 
             <Label
                 x:Name="UserPhoneNumber"
-                Text="бубубу"
                 HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
                 FontSize="14"
                 FontAttributes="Bold"
-                FontFamily="Comfortaa"/>
-            <!--тут будет оторажаться еще номер пользователя, который он вводил-->
+                FontFamily="Comfortaa">
+
+                Введите данные от аккаунта, личные данные
+                и код подтверждения из SMS на ваш номер.
+                
+            </Label>
+                    <!--тут будет оторажаться еще номер пользователя, который он вводил-->
 
         </VerticalStackLayout>
 
@@ -56,7 +61,7 @@
                 x:Name="UserNameBorder"
                 Grid.Row="0"
                 Grid.Column="0"
-                Stroke="#2d0c98"
+                Stroke="#6134f0"
                 StrokeThickness="2"
                 StrokeShape="15"
                 Padding="0"
@@ -79,18 +84,18 @@
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
                 Text=" Имя пользователя  "
-                TextColor="#2d0c98"
+                TextColor="#6134f0"
                 FontSize="12"
                 FontAttributes="Bold"
                 FontFamily="Comfortaa"
                 TranslationY="-9"
-                Background="White"/>
+                Background="{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
 
             <!--second stroke-->
             <Border
                 Grid.Row="1"
                 Grid.Column="0"
-                Stroke="#2d0c98"
+                Stroke="#6134f0"
                 StrokeThickness="2"
                 StrokeShape="15"
                 Margin="0, 0, 0, 10"
@@ -112,12 +117,12 @@
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
                 Text=" Пароль  "
-                TextColor="#2d0c98"
+                TextColor="#6134f0"
                 FontSize="12"
                 FontAttributes="Bold"
                 FontFamily="Comfortaa"
                 TranslationY="-9"
-                Background="White"/>
+                Background="{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
 
             <!--date/gender-->
             <Grid
@@ -131,7 +136,7 @@
                 <Border
                 Grid.Row="0"
                 Grid.Column="0"
-                Stroke="#2d0c98"
+                Stroke="#6134f0"
                 StrokeThickness="2"
                 StrokeShape="15"
                 Margin="0, 0, 0, 10"
@@ -152,18 +157,18 @@
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
                 Text=" Дата рождения "
-                TextColor="#2d0c98"
+                TextColor="#6134f0"
                 FontSize="12"
                 FontAttributes="Bold"
                 FontFamily="Comfortaa"
                 TranslationY="-9"
-                Background="White"/>
+                Background="{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
                 
                 <!--gender-->
                 <Border
                 Grid.Row="0"
                 Grid.Column="1"
-                Stroke="#2d0c98"
+                Stroke="#6134f0"
                 StrokeThickness="2"
                 StrokeShape="15"
                 Margin="10, 0, 0, 10"
@@ -196,12 +201,12 @@
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
                 Text=" Пол "
-                TextColor="#2d0c98"
+                TextColor="#6134f0"
                 FontSize="12"
                 FontAttributes="Bold"
                 FontFamily="Comfortaa"
                 TranslationY="-9"
-                Background="White"/>
+                Background="{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
 
             </Grid>
 
@@ -219,7 +224,7 @@
                 
                 <CheckBox 
                     x:Name="AgreementCheckBox"
-                    Color="#2d0c98"
+                    Color="#6134f0"
                     CheckedChanged="AgreementCheckBox_CheckedChanged"/>
 
                 <Label 
@@ -248,7 +253,7 @@
                                 FontFamily="Comfortaa"
                                 FontAttributes="Bold" 
                                 TextDecorations="Underline" 
-                                TextColor="#2d0c98">
+                                TextColor="#6134f0">
                                 
                                 <Span.GestureRecognizers>
                                     
@@ -270,7 +275,7 @@
             <HorizontalStackLayout>
                 <CheckBox 
                     x:Name="PrivacyCheckBox"
-                    Color="#2d0c98"
+                    Color="#6134f0"
                     CheckedChanged="AgreementCheckBox_CheckedChanged"/>
 
                 <Label
@@ -299,7 +304,7 @@
                                 FontFamily="Comfortaa"
                                 FontAttributes="Bold" 
                                 TextDecorations="Underline" 
-                                TextColor="#2d0c98">
+                                TextColor="#6134f0">
                                 
                                 <Span.GestureRecognizers>
 
@@ -325,7 +330,7 @@
                 Opacity="0.5"
                 TextColor="White"
                 FontFamily="Comfortaa"
-                BackgroundColor="#2d0c98"
+                BackgroundColor="#6134f0"
                 CornerRadius="15" 
                 HeightRequest="50"
                 HorizontalOptions="Fill"

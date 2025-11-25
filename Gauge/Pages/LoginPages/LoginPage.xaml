@@ -4,8 +4,8 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Gauge.Pages.LoginPages.LoginPage"
-             BackgroundColor="White"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             Background="{AppThemeBinding Dark = #1c1c1c, Light = White}">
 
     <Grid 
         RowDefinitions="*, Auto"
@@ -79,7 +79,7 @@
                     
                     <Border
                         x:Name="LoginBorder"
-                        Stroke="#2d0c98"
+                        Stroke="#6134f0"
                         StrokeThickness="2"
                         StrokeShape="15"
                         Padding="0"
@@ -104,12 +104,12 @@
                         VerticalOptions="Start"
                         HorizontalOptions="Center"
                         Text=" Номер телефона "
-                        TextColor="#2d0c98"
+                        TextColor="#6134f0"
                         FontSize="12"
                         FontAttributes="Bold"
                         FontFamily="Comfortaa"
                         TranslationY="-9"
-                        Background="White"/>
+                        Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
                 </Grid>
                 
                 <!--ввод проверочного кода-->
@@ -123,7 +123,7 @@
                     <Border
                         Grid.Row="0"
                         Grid.Column="0"
-                        Stroke="#2d0c98"
+                        Stroke="#6134f0"
                         StrokeThickness="2"
                         StrokeShape="15"
                         Padding="0"
@@ -146,12 +146,12 @@
                         VerticalOptions="Start"
                         HorizontalOptions="Center"
                         Text=" Проверочный код "
-                        TextColor="#2d0c98"
+                        TextColor="#6134f0"
                         FontSize="12"
                         FontAttributes="Bold"
                         FontFamily="Comfortaa"
                         TranslationY="-9"
-                        Background="White"/>
+                        Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
                     
                 </Grid>
 
@@ -167,7 +167,7 @@
                         x:Name="PasswordBorder"
                         Grid.Row="0"
                         Grid.Column="0"
-                        Stroke="#2d0c98"
+                        Stroke="#6134f0"
                         StrokeThickness="2"
                         StrokeShape="15"
                         Padding="0"
@@ -189,12 +189,12 @@
                         VerticalOptions="Start"
                         HorizontalOptions="Center"
                         Text=" Пароль "
-                        TextColor="#2d0c98"
+                        TextColor="#6134f0"
                         FontSize="12"
                         FontAttributes="Bold"
                         FontFamily="Comfortaa"
                         TranslationY="-9"
-                        Background="White"/>
+                        Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
                     
                 </Grid>
 
@@ -215,7 +215,7 @@
                     CornerRadius="15"
                     HeightRequest="50"
                     WidthRequest="50"
-                    BackgroundColor="#2d0c98"
+                    BackgroundColor="#6134f0"
                     Clicked="ReloadButton_Clicked"/>
                 
                 <Button
@@ -225,7 +225,7 @@
                     Text="Проверить"
                     TextColor="White"
                     FontFamily="Comfortaa"
-                    BackgroundColor="#2d0c98"
+                    BackgroundColor="#6134f0"
                     CornerRadius="15"
                     HeightRequest="50"
                     HorizontalOptions="Fill"

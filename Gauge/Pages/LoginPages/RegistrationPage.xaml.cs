@@ -10,7 +10,7 @@ public partial class RegistrationPage : ContentPage
     public RegistrationPage(string phoneNumber)
 	{
 		InitializeComponent();
-        UserPhoneNumber.Text = phoneNumber;
+        UserPhoneNumber.Text = $"¬ведите данные от аккаунта, личные данные\nи код подтверждени€ из SMS на номер\n{phoneNumber}.";
 	}
 
     /*
@@ -98,10 +98,7 @@ public partial class RegistrationPage : ContentPage
         if (NewUserPassword.Text.Length >= 6) NewUserPassword.ClassId = "Valid";
     }
 
-    private void NewUserGender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-        if (NewUserGender.SelectedItem != null) NewUserGender.ClassId = "Valid"; 
-    }
+
 
     private void NewDate_DateSelected(object sender, DateChangedEventArgs e)
     {
