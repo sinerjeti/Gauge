@@ -182,7 +182,7 @@
                     VerticalOptions="Center"
                     Margin="10, 0, 10, 0"
                     BackgroundColor="Transparent"
-                    PropertyChanged="NewUserGender_PropertyChanged">
+                    SelectedIndexChanged="NewUserGender_SelectedIndexChanged">
 
                         <Picker.Items>
 

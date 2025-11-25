@@ -64,7 +64,7 @@ public partial class LoginPage : ContentPage
         }
         catch (Exception)
         {
-            await DisplayAlertAsync("Error", $"ошибка выполнения", "OK");
+            await DisplayAlertAsync("Error", "ошибка выполнения", "OK");
         }
 
         /*
@@ -125,5 +125,7 @@ public partial class LoginPage : ContentPage
         LoginNumber.Text = string.Empty;
         LoginNumber.IsReadOnly = false;
         Password.Text = string.Empty;
+        Button.Clicked -= CheckPassword;
+        Button.Clicked += EnterLoginNumber;
     }
 }
