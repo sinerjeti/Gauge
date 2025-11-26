@@ -92,7 +92,8 @@
                             Placeholder="+7 (800) 555-35-35"
                             Margin="12.5, 0, 12.5, 0"
                             Keyboard="Numeric"
-                            TextChanged="ChangedLoginNumber">
+                            TextChanged="ChangedLoginNumber"
+                            Completed="EnterLoginNumber">
 
                             <Entry.Behaviors>
 

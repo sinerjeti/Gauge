@@ -1,4 +1,5 @@
 using Gauge.DTOs;
+using Microsoft.Maui.Animations;
 using System.Net.Http.Json;
 using WebApiForGauge.Models;
 
@@ -21,8 +22,6 @@ public partial class LoginPage : ContentPage
         }
         else
         {
-            LoginBorder.Stroke = Color.FromArgb("#6134f0");
-            LoginNumberLabel.TextColor = Color.FromArgb("#6134f0");
             Button.IsEnabled = false;
             Button.Opacity = 0.5;
         }
@@ -40,6 +39,8 @@ public partial class LoginPage : ContentPage
         {
             Button.Opacity = 0.5;
             Button.IsEnabled = true;
+            LoginBorder.Stroke = Colors.Yellow;         //тут короче строа перекрашиваетс€ в желтый цвет, пока идет подключение к апишке
+            LoginNumberLabel.TextColor = Colors.Yellow; //мне бы хотелось, чтобы это была плавна€ анимаци€ переливани€ с цвета в цвет, а не резкое окрашивание
             PhoneNumberRequestDTO phoneNumber = new() { PhoneNumber = LoginNumber.Text };
             using var response = await _httpClient.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -48,9 +49,13 @@ public partial class LoginPage : ContentPage
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                await Grid1.TranslateToAsync(0, -55, 500, Easing.SinIn);
+                await Grid1.TranslateToAsync(0, -67.5, 500, Easing.SinIn);
+                LoginBorder.Stroke = Colors.Green; //то же самое, хочу анимации(((
+                LoginNumberLabel.TextColor = Colors.Green;
                 Grid2.IsVisible = true;
                 await Grid2.FadeToAsync(1, 500);
+                Grid3.IsVisible = true;
+                await Grid3.FadeToAsync(1, 500);
 
                 /*
                 короче, теперь все сетки расположены в одной строке общей сетки. при изменении параметра IsEnabled
