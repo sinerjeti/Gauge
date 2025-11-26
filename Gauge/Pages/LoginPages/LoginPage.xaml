@@ -66,7 +66,7 @@
                 x:Name="idk"
                 IsVisible="True"
                 Scale="1"
-                RowDefinitions="*"
+                RowDefinitions="auto"
                 ColumnDefinitions="*"
                 HorizontalOptions="Fill"
                 Margin="0, 0, 0, 20"
@@ -167,7 +167,7 @@
                     IsVisible="False"
                     Opacity="0"
                     RowDefinitions="Auto"
-                    ColumnDefinitions="*"
+                    ColumnDefinitions="*, auto"
                     HorizontalOptions="Fill"
                     Margin="0, 0, 0, 0"
                     RowSpacing="0">
@@ -199,7 +199,29 @@
                         FontFamily="Comfortaa"
                         TranslationY="-9.2"
                         Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
-                    
+
+                    <Border
+                        x:Name="VerificationCodeButtonBorder"
+                        Grid.Column="1"
+                        Margin="19.5, 0, 0, 0"
+                        HorizontalOptions="End"
+                        Stroke="#6134f0"
+                        StrokeThickness="2"
+                        StrokeShape="15"
+                        HeightRequest="48"
+                        WidthRequest="48">
+
+                        <Button
+                            x:Name="VerificationCodeButton"
+                            IsVisible="True"
+                            ImageSource="restarticon.png"
+                            Margin="0, 0, 0, 0"
+                            CornerRadius="15"
+                            Background="Transparent"
+                            Clicked="ReloadButton_Clicked"/>
+
+                    </Border>
+
                 </Grid>
 
             </Grid>
@@ -208,12 +230,12 @@
             <Grid
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill"
-                ColumnDefinitions="auto, *">
+                ColumnDefinitions="*">
 
                 <Button
-                    Grid.Column="0"
                     x:Name="ReloadButton"
-                    IsVisible="False"
+                    HorizontalOptions="Start"
+                    IsVisible="True"
                     ImageSource="restarticon.png"
                     Margin="0, 0, 20, 20"
                     CornerRadius="15"
@@ -223,8 +245,8 @@
                     Clicked="ReloadButton_Clicked"/>
                 
                 <Button
-                    Grid.Column="1"
                     x:Name="Button"
+                    HorizontalOptions="Fill"
                     IsEnabled="False"
                     Text="Проверить"
                     TextColor="White"
@@ -232,10 +254,9 @@
                     BackgroundColor="#6134f0"
                     CornerRadius="15"
                     HeightRequest="50"
-                    HorizontalOptions="Fill"
                     Clicked="EnterLoginNumber"
                     Opacity="0.5"
-                    Margin="0, 0, 0, 20"/>
+                    Margin="0, 0, 0, 19.5"/>
 
             </Grid>
 
