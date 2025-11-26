@@ -6,11 +6,13 @@ namespace Gauge.Pages.LoginPages;
 public partial class RegistrationPage : ContentPage
 {
     private static readonly HttpClient _httpClient = new HttpClient();
+    private string _number;
 
     public RegistrationPage(string phoneNumber)
 	{
 		InitializeComponent();
-        UserPhoneNumber.Text = $"¬ведите данные от аккаунта, личные данные\nи код подтверждени€ из SMS на номер\n{phoneNumber}.";
+        _number = phoneNumber;
+        UserPhoneNumber.Text = $"¬ведите данные от аккаунта, личные данные\nи код подтверждени€ из SMS на номер\n{_number}.";
 	}
 
     /*
@@ -28,14 +30,14 @@ public partial class RegistrationPage : ContentPage
             RegisterUserDTO newUser = new()
             {
                 Username = NewUserName.Text,
-                PhoneNumber = UserPhoneNumber.Text,
+                PhoneNumber = _number,
                 Password = NewUserPassword.Text,
                 Birthday = DateOnly.FromDateTime((DateTime)NewDate.Date).ToString()
             };
             using var response = await _httpClient.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/createuser", newUser);
             if (response.StatusCode != System.Net.HttpStatusCode.Created)
             {
-                await DisplayAlertAsync("error", "damn bro, it`s error", "OK");
+                await DisplayAlertAsync("error", $"damn bro, it`s error {response.StatusCode}", "OK");
                 RegisterButton.IsEnabled = true;
                 RegisterButton.Opacity = 1;
             }

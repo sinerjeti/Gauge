@@ -12,7 +12,7 @@
         ColumnDefinitions="*"
         HorizontalOptions="Fill" 
         VerticalOptions="Fill" 
-        Padding="10, 0, 10, 0">
+        Padding="20, 0, 20, 0">
 
         <!--верх-->
         <VerticalStackLayout
@@ -63,137 +63,141 @@
             
             <!--строки ввода-->
             <Grid
-                RowDefinitions="Auto, 0, Auto"
+                x:Name="idk"
+                IsVisible="True"
+                Scale="1"
+                RowDefinitions="*"
                 ColumnDefinitions="*"
                 HorizontalOptions="Fill"
-                Margin="0, 0, 0, 0"
+                Margin="0, 0, 0, 20"
                 RowSpacing="0">
 
                 <!--ввод номера-->
                 <Grid
                     x:Name="Grid1"
-                    Grid.Row="0"
-                    Grid.Column="0"
+                    Margin="0"
                     IsVisible="True"
-                    Margin="0, 0, 0, 0">
-                    
+                    Opacity="1">
+
                     <Border
                         x:Name="LoginBorder"
                         Stroke="#6134f0"
                         StrokeThickness="2"
                         StrokeShape="15"
-                        Padding="0"
-                        Margin="0, 0, 0, 15"
-                        HorizontalOptions="Fill">
+                        Margin="0"
+                        VerticalOptions="Center">
 
-                        <Entry 
-                            Placeholder="+7 (905) 905-05-05"
+                        <Entry
                             x:Name="LoginNumber"
-                            FontFamily="Comfortaa"
-                            Margin="10, 0, 10, 0"
+                            Placeholder="+7 (800) 555-35-35"
+                            Margin="12.5, 0, 12.5, 0"
                             Keyboard="Numeric"
                             TextChanged="ChangedLoginNumber">
+
                             <Entry.Behaviors>
-                                <mct:MaskedBehavior Mask= "+X (XXX) XXX-XX-XX" UnmaskedCharacter="X"/>
+
+                                <mct:MaskedBehavior Mask="+X (XXX) XXX-XX-XX" UnmaskedCharacter="X"/>
+
                             </Entry.Behaviors>
+
                         </Entry>
+
                     </Border>
 
                     <Label
-                        x:Name="LoginLabel"
-                        VerticalOptions="Start"
+                        x:Name="LoginNumberLabel"
                         HorizontalOptions="Center"
+                        VerticalOptions="Start"
                         Text=" Номер телефона "
                         TextColor="#6134f0"
                         FontSize="12"
                         FontAttributes="Bold"
                         FontFamily="Comfortaa"
-                        TranslationY="-9"
+                        TranslationY="-9.2"
                         Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
-                </Grid>
-                
-                <!--ввод проверочного кода-->
-                <Grid
-                    x:Name="Grid2"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    IsVisible="False"
-                    Margin="0,15, 0, 0">
-                    
-                    <Border
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Stroke="#6134f0"
-                        StrokeThickness="2"
-                        StrokeShape="15"
-                        Padding="0"
-                        Margin="0, 0, 0, 10"
-                        HorizontalOptions="Fill">
 
-                        <Entry 
-                            Placeholder="1234"
-                            x:Name="VerificationCode"
-                            FontFamily="Comfortaa"
-                            Margin="10, 0, 10, 0"
-                            Keyboard="Numeric"
-                            MaxLength ="4"/>
-
-                    </Border>
-
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        VerticalOptions="Start"
-                        HorizontalOptions="Center"
-                        Text=" Проверочный код "
-                        TextColor="#6134f0"
-                        FontSize="12"
-                        FontAttributes="Bold"
-                        FontFamily="Comfortaa"
-                        TranslationY="-9"
-                        Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
-                    
                 </Grid>
 
                 <!--ввод пароля-->
                 <Grid
-                    x:Name="Grid3"
-                    Grid.Row="2"
-                    Grid.Column="0"
+                    x:Name="Grid2"
+                    IsVisible="False"
+                    Opacity="0"
+                    RowDefinitions="Auto"
+                    ColumnDefinitions="*"
+                    HorizontalOptions="Fill"
                     Margin="0, 0, 0, 0"
-                    IsVisible="False">
+                    RowSpacing="0">
                     
                     <Border
                         x:Name="PasswordBorder"
-                        Grid.Row="0"
-                        Grid.Column="0"
                         Stroke="#6134f0"
                         StrokeThickness="2"
                         StrokeShape="15"
-                        Padding="0"
-                        Margin="0, 0, 0, 15"
-                        HorizontalOptions="Fill">
+                        Margin="0"
+                        VerticalOptions="Center">
 
                         <Entry 
-                            Placeholder="Осуждаю"
                             x:Name="Password"
-                            FontFamily="Comfortaa"
-                            Margin="10, 0, 10, 0"
-                            Keyboard="Password"/>
+                            Placeholder="********"
+                            Margin="12.5, 0, 12.5, 0"
+                            Keyboard="Password"
+                            TextChanged="ChangedPassword"/>
 
                     </Border>
 
                     <Label
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        VerticalOptions="Start"
+                        x:Name="PasswordLabel"
                         HorizontalOptions="Center"
+                        VerticalOptions="Start"
                         Text=" Пароль "
                         TextColor="#6134f0"
                         FontSize="12"
                         FontAttributes="Bold"
                         FontFamily="Comfortaa"
-                        TranslationY="-9"
+                        TranslationY="-9.2"
+                        Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
+                    
+                </Grid>
+
+                <!--ввод проверочного кода-->
+                <Grid
+                    x:Name="Grid3"
+                    IsVisible="False"
+                    Opacity="0"
+                    RowDefinitions="Auto"
+                    ColumnDefinitions="*"
+                    HorizontalOptions="Fill"
+                    Margin="0, 0, 0, 0"
+                    RowSpacing="0">
+                    
+                    <Border
+                        x:Name="VerificationCodeBorder"
+                        Stroke="#6134f0"
+                        StrokeThickness="2"
+                        StrokeShape="15"
+                        Margin="0"
+                        VerticalOptions="Center">
+
+                        <Entry 
+                            x:Name="VerificationCode"
+                            Placeholder="****"
+                            Margin="12.5, 0, 12.5, 0"
+                            Keyboard="Password"
+                            TextChanged="ChangedVerificationCode"/>
+
+                    </Border>
+
+                    <Label
+                        x:Name="VerificationCodeLabel"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Start"
+                        Text=" Проверочный код "
+                        TextColor="#6134f0"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        FontFamily="Comfortaa"
+                        TranslationY="-9.2"
                         Background = "{AppThemeBinding Dark = #1c1c1c, Light = White}"/>
                     
                 </Grid>

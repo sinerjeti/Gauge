@@ -22,7 +22,7 @@ public partial class LoginPage : ContentPage
         else
         {
             LoginBorder.Stroke = Color.FromArgb("#6134f0");
-            LoginLabel.TextColor = Color.FromArgb("#6134f0");
+            LoginNumberLabel.TextColor = Color.FromArgb("#6134f0");
             Button.IsEnabled = false;
             Button.Opacity = 0.5;
         }
@@ -49,17 +49,26 @@ public partial class LoginPage : ContentPage
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 await Grid1.TranslateToAsync(0, -55, 500, Easing.SinIn);
-                Grid1.TranslationY = 0;
-                Grid1.Margin = new(0, -55, 0, 0);
+                Grid2.IsVisible = true;
+                await Grid2.FadeToAsync(1, 500);
+
+                /*
+                короче, теперь все сетки расположены в одной строке общей сетки. при изменении параметра IsEnabled
+                никто никуда прыгать и съезжать не будет. тебе нужно анимку сделать в таком порядке: 
+                1. у тебя съездает Grid1 на некоторые коорды && кнопка становится меньше и меняет параметр HorizontalOptions на End
+                ?2. появляется строка с вводом пароля и строка с вводом кода. пока не знаю, как это реализовать, главное сделать первое.
+                */
+
+                /*await Grid1.TranslateToAsync(0, -55, 500, Easing.SinIn);
                 Grid3.IsVisible = true;
                 LoginNumber.IsReadOnly = true;
                 LoginBorder.Stroke = Color.FromArgb("#6134f0");
-                LoginLabel.TextColor = Color.FromArgb("#6134f0");
+                LoginNumberLabel.TextColor = Color.FromArgb("#6134f0");
                 ReloadButton.IsVisible = true;
                 Button.Clicked -= EnterLoginNumber;
                 Button.Clicked += CheckPassword;
                 Button.IsEnabled = false;
-                Button.Opacity = 0.5;
+                Button.Opacity = 0.5;*/
             }
         }
         catch (Exception)
@@ -116,6 +125,7 @@ public partial class LoginPage : ContentPage
 
     private async void ReloadButton_Clicked(object sender, EventArgs e)
     {
+        /*
         ReloadButton.IsVisible = false;
         Grid3.IsVisible = false;
         Grid1.TranslationY = -57;
@@ -127,5 +137,6 @@ public partial class LoginPage : ContentPage
         Password.Text = string.Empty;
         Button.Clicked -= CheckPassword;
         Button.Clicked += EnterLoginNumber;
+        */
     }
 }
