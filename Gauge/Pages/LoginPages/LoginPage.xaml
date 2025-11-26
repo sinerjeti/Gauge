@@ -143,8 +143,7 @@
                             IsReadOnly="False"
                             Placeholder="********"
                             Margin="12.5, 0, 12.5, 0"
-                            Keyboard="Password"
-                            TextChanged="ChangedPassword"/>
+                            Keyboard="Password"/>
 
                     </Border>
 
@@ -185,8 +184,7 @@
                             x:Name="VerificationCode"
                             Placeholder="****"
                             Margin="12.5, 0, 12.5, 0"
-                            Keyboard="Password"
-                            TextChanged="ChangedVerificationCode"/>
+                            Keyboard="Password"/>
 
                     </Border>
 

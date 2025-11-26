@@ -15,6 +15,8 @@ public partial class LoginPage : ContentPage
 
     private void ChangedLoginNumber(object sender, TextChangedEventArgs e)
     {
+        if (LoginNumber.Text.Length < 2) return;
+        if (LoginNumber.Text[1] != '7') LoginNumber.Text = $"{LoginNumber.Text[0]}7";
         if (LoginNumber.Text.Length == 18)
         {
             Button.IsEnabled = true;
@@ -24,6 +26,7 @@ public partial class LoginPage : ContentPage
         {
             Button.IsEnabled = false;
             Button.Opacity = 0.5;
+            return;
         }
     }
 
