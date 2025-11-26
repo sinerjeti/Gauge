@@ -8,7 +8,7 @@
              Background="{AppThemeBinding Dark = #1c1c1c, Light = White}">
 
     <Grid 
-        RowDefinitions="*, Auto"
+        RowDefinitions="auto, *"
         ColumnDefinitions="*"
         HorizontalOptions="Fill" 
         VerticalOptions="Fill" 
@@ -69,6 +69,7 @@
                 RowDefinitions="auto"
                 ColumnDefinitions="*"
                 HorizontalOptions="Fill"
+                VerticalOptions="Fill"
                 Margin="0, 0, 0, 20"
                 RowSpacing="0">
 
@@ -124,7 +125,7 @@
                     x:Name="Grid2"
                     IsVisible="False"
                     Opacity="0"
-                    RowDefinitions="Auto"
+                    RowDefinitions="*"
                     ColumnDefinitions="*"
                     HorizontalOptions="Fill"
                     Margin="0, 0, 0, 0"
@@ -140,7 +141,6 @@
 
                         <Entry 
                             x:Name="Password"
-                            IsReadOnly="False"
                             Placeholder="********"
                             Margin="12.5, 0, 12.5, 0"
                             Keyboard="Password"/>
@@ -166,7 +166,7 @@
                     x:Name="Grid3"
                     IsVisible="False"
                     Opacity="0"
-                    RowDefinitions="Auto"
+                    RowDefinitions="*"
                     ColumnDefinitions="*, auto"
                     HorizontalOptions="Fill"
                     Margin="0, 0, 0, 0"

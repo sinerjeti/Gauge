@@ -54,9 +54,9 @@ public partial class LoginPage : ContentPage
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                /*
                 LoginBorder.Stroke = Colors.Green; //то же самое, хочу анимации(((
-                LoginNumberLabel.TextColor = Colors.Green;
-                LoginNumber.IsReadOnly = true;
+                LoginNumberLabel.TextColor = Colors.Green;        
                 Grid1.TranslateToAsync(0, -139, 350, Easing.SinIn);
                 Grid2.IsVisible = true;
                 Grid3.IsVisible = true;
@@ -65,13 +65,19 @@ public partial class LoginPage : ContentPage
                 Grid2.FadeToAsync(1, 350);
                 await Grid3.FadeToAsync(1, 350);
                 Grid1.TranslateToAsync(0, -135, 350, Easing.SinIn);
+                Grid1.Margin = new(0, -135, 0, 0);
+                Grid1.TranslationY = 0;
                 Grid2.TranslateToAsync(0, -67.5, 350, Easing.SinIn);
+                Grid2.Margin = new(0, -67.5, 0, 0);
+                Grid2.TranslationY = 0;
                 Grid3.TranslateToAsync(0, 0, 350, Easing.SinIn);
+                Grid3.Margin = new(0, 0, 0, 0);
+                Grid3.TranslationY = 0;
                 Button.Clicked -= EnterLoginNumber;
                 Button.Clicked += CheckPassword;
                 Button.IsEnabled = false;
                 Button.Opacity = 0.5;
-
+                */
             }
         }
         catch (Exception)
