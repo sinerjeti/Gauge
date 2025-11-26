@@ -140,6 +140,7 @@
 
                         <Entry 
                             x:Name="Password"
+                            IsReadOnly="False"
                             Placeholder="********"
                             Margin="12.5, 0, 12.5, 0"
                             Keyboard="Password"

@@ -32,6 +32,8 @@ public partial class LoginPage : ContentPage
         if(Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
         {
             await DisplayAlertAsync("error", "Отсутствует подключение к интернету!", "OK");
+            LoginBorder.Stroke = Colors.Grey; //то же самое, хочу анимации(((
+            LoginNumberLabel.TextColor = Colors.Grey;
             return;
         }
 
@@ -49,36 +51,31 @@ public partial class LoginPage : ContentPage
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                await Grid1.TranslateToAsync(0, -67.5, 500, Easing.SinIn);
                 LoginBorder.Stroke = Colors.Green; //то же самое, хочу анимации(((
                 LoginNumberLabel.TextColor = Colors.Green;
-                Grid2.IsVisible = true;
-                await Grid2.FadeToAsync(1, 500);
-                Grid3.IsVisible = true;
-                await Grid3.FadeToAsync(1, 500);
-
-                /*
-                короче, теперь все сетки расположены в одной строке общей сетки. при изменении параметра IsEnabled
-                никто никуда прыгать и съезжать не будет. тебе нужно анимку сделать в таком порядке: 
-                1. у тебя съездает Grid1 на некоторые коорды && кнопка становится меньше и меняет параметр HorizontalOptions на End
-                ?2. появляется строка с вводом пароля и строка с вводом кода. пока не знаю, как это реализовать, главное сделать первое.
-                */
-
-                /*await Grid1.TranslateToAsync(0, -55, 500, Easing.SinIn);
-                Grid3.IsVisible = true;
                 LoginNumber.IsReadOnly = true;
-                LoginBorder.Stroke = Color.FromArgb("#6134f0");
-                LoginNumberLabel.TextColor = Color.FromArgb("#6134f0");
-                ReloadButton.IsVisible = true;
+                Grid1.TranslateToAsync(0, -139, 350, Easing.SinIn);
+                Grid2.IsVisible = true;
+                Grid3.IsVisible = true;
+                Grid2.TranslateToAsync(0, -71.5, 350, Easing.SinIn);
+                Grid3.TranslateToAsync(0, -4, 350, Easing.SinIn);
+                Grid2.FadeToAsync(1, 350);
+                await Grid3.FadeToAsync(1, 350);
+                Grid1.TranslateToAsync(0, -135, 350, Easing.SinIn);
+                Grid2.TranslateToAsync(0, -67.5, 350, Easing.SinIn);
+                Grid3.TranslateToAsync(0, 0, 350, Easing.SinIn);
                 Button.Clicked -= EnterLoginNumber;
                 Button.Clicked += CheckPassword;
                 Button.IsEnabled = false;
-                Button.Opacity = 0.5;*/
+                Button.Opacity = 0.5;
+
             }
         }
         catch (Exception)
         {
             await DisplayAlertAsync("Error", "ошибка выполнения", "OK");
+            LoginBorder.Stroke = Colors.Red; //то же самое, хочу анимации(((
+            LoginNumberLabel.TextColor = Colors.Red;
         }
 
         /*
