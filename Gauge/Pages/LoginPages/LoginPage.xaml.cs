@@ -53,7 +53,6 @@ public partial class LoginPage : ContentPage
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                /*
                 LoginBorder.Stroke = Colors.Green; //то же самое, хочу анимации(((
                 LoginNumberLabel.TextColor = Colors.Green;
                 LoginNumber.IsReadOnly = true;
