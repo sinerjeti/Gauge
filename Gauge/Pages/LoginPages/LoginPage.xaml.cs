@@ -56,23 +56,20 @@ public partial class LoginPage : ContentPage
             {
                 /*
                 LoginBorder.Stroke = Colors.Green; //то же самое, хочу анимации(((
-                LoginNumberLabel.TextColor = Colors.Green;        
-                Grid1.TranslateToAsync(0, -139, 350, Easing.SinIn);
-                Grid2.IsVisible = true;
-                Grid3.IsVisible = true;
-                Grid2.TranslateToAsync(0, -71.5, 350, Easing.SinIn);
-                Grid3.TranslateToAsync(0, -4, 350, Easing.SinIn);
-                Grid2.FadeToAsync(1, 350);
-                await Grid3.FadeToAsync(1, 350);
-                Grid1.TranslateToAsync(0, -135, 350, Easing.SinIn);
-                Grid1.Margin = new(0, -135, 0, 0);
+                LoginNumberLabel.TextColor = Colors.Green;
+                LoginNumber.IsReadOnly = true;
+                await Grid1.TranslateToAsync(0, -140, 500, Easing.SinIn);
+                idk.SetRow(Grid1, 0);
                 Grid1.TranslationY = 0;
-                Grid2.TranslateToAsync(0, -67.5, 350, Easing.SinIn);
-                Grid2.Margin = new(0, -67.5, 0, 0);
+                idk.SetRow(Grid2, 2);
+                await Grid2.FadeToAsync(1, 500, Easing.SinIn);
+                await Grid2.TranslateToAsync(0, -70, 500, Easing.SinIn);
+                idk.SetRow(Grid2, 1);
                 Grid2.TranslationY = 0;
-                Grid3.TranslateToAsync(0, 0, 350, Easing.SinIn);
-                Grid3.Margin = new(0, 0, 0, 0);
-                Grid3.TranslationY = 0;
+                Grid2.IsEnabled = true;
+                idk.SetRow(Grid3, 2);
+                await Grid3.FadeToAsync(1, 500, Easing.SinIn);
+                Grid3.IsEnabled = true;
                 Button.Clicked -= EnterLoginNumber;
                 Button.Clicked += CheckPassword;
                 Button.IsEnabled = false;

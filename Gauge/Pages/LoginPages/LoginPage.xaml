@@ -56,8 +56,6 @@
         <VerticalStackLayout
             x:Name="BottomContent"
             Grid.Row="1"
-            Grid.Column="0"
-            Spacing="0" 
             HorizontalOptions="Fill" 
             VerticalOptions="End">
             
@@ -66,19 +64,19 @@
                 x:Name="idk"
                 IsVisible="True"
                 Scale="1"
-                RowDefinitions="auto"
-                ColumnDefinitions="*"
+                RowDefinitions="50, 50, 50"
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill"
                 Margin="0, 0, 0, 20"
-                RowSpacing="0">
+                RowSpacing="20"
+                Grid.RowSpan="3">
 
                 <!--ввод номера-->
                 <Grid
                     x:Name="Grid1"
-                    Margin="0"
                     IsVisible="True"
-                    Opacity="1">
+                    Opacity="1"
+                    Grid.Row="2">
 
                     <Border
                         x:Name="LoginBorder"
@@ -123,13 +121,11 @@
                 <!--ввод пароля-->
                 <Grid
                     x:Name="Grid2"
-                    IsVisible="False"
+                    IsEnabled="False"
                     Opacity="0"
-                    RowDefinitions="*"
-                    ColumnDefinitions="*"
+                    RowDefinitions="Auto"
                     HorizontalOptions="Fill"
-                    Margin="0, 0, 0, 0"
-                    RowSpacing="0">
+                    Grid.Row="1">
                     
                     <Border
                         x:Name="PasswordBorder"
@@ -164,13 +160,11 @@
                 <!--ввод проверочного кода-->
                 <Grid
                     x:Name="Grid3"
-                    IsVisible="False"
                     Opacity="0"
-                    RowDefinitions="*"
-                    ColumnDefinitions="*, auto"
+                    IsEnabled="False"
+                    RowDefinitions="Auto"
                     HorizontalOptions="Fill"
-                    Margin="0, 0, 0, 0"
-                    RowSpacing="0">
+                    Grid.Row="0">
                     
                     <Border
                         x:Name="VerificationCodeBorder"
@@ -184,7 +178,8 @@
                             x:Name="VerificationCode"
                             Placeholder="****"
                             Margin="12.5, 0, 12.5, 0"
-                            Keyboard="Password"/>
+                            Keyboard="Numeric"
+                            MaxLength="4"/>
 
                     </Border>
 
