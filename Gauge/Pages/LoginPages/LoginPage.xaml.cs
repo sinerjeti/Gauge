@@ -1,5 +1,4 @@
 using Gauge.DTOs;
-using Microsoft.Maui.Animations;
 using System.Net.Http.Json;
 using WebApiForGauge.Models;
 
