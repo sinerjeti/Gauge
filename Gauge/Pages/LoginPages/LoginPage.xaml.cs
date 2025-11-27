@@ -7,7 +7,7 @@ namespace Gauge.Pages.LoginPages;
 
 public partial class LoginPage : ContentPage
 {
-    private static readonly HttpClient _httpClient = new HttpClient();
+    private static readonly HttpClient _httpClient = new();
     public LoginPage()
     {
         InitializeComponent();
@@ -74,7 +74,6 @@ public partial class LoginPage : ContentPage
                 Button.Clicked += CheckPassword;
                 Button.IsEnabled = false;
                 Button.Opacity = 0.5;
-                */
             }
         }
         catch (Exception)
