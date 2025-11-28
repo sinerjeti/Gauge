@@ -7,6 +7,7 @@ namespace Gauge.Pages.LoginPages;
 public partial class LoginPage : ContentPage
 {
     private static readonly HttpClient _httpClient = new();
+
     public LoginPage()
     {
         InitializeComponent();
@@ -34,8 +35,8 @@ public partial class LoginPage : ContentPage
         if(Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
         {
             await DisplayAlertAsync("error", "Отсутствует подключение к интернету!", "OK");
-            LoginBorder.Stroke = Colors.Grey; //то же самое, хочу анимации(((
-            LoginNumberLabel.TextColor = Colors.Grey;
+            await LoginBorder.ColorTo(Color.FromArgb("6134f0"), Colors.Grey, c => { LoginNumberLabel.TextColor = c;
+                                                                                    LoginBorder.Stroke = c; }, 2000, Easing.SinIn);
             return;
         }
 
@@ -43,8 +44,8 @@ public partial class LoginPage : ContentPage
         {
             Button.Opacity = 0.5;
             Button.IsEnabled = true;
-            LoginBorder.Stroke = Colors.Yellow;         //тут короче строа перекрашивается в желтый цвет, пока идет подключение к апишке
-            LoginNumberLabel.TextColor = Colors.Yellow; //мне бы хотелось, чтобы это была плавная анимация переливания с цвета в цвет, а не резкое окрашивание
+            await LoginBorder.ColorTo(Color.FromArgb("6134f0"), Colors.Yellow, c => { LoginNumberLabel.TextColor = c;
+                                                                                      LoginBorder.Stroke = c;}, 2000, Easing.SinIn);
             PhoneNumberRequestDTO phoneNumber = new() { PhoneNumber = LoginNumber.Text };
             using var response = await _httpClient.PostAsJsonAsync("https://webapiforgauge.onrender.com/user/checkuserexist", phoneNumber);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -53,8 +54,8 @@ public partial class LoginPage : ContentPage
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                LoginBorder.Stroke = Colors.Green; //то же самое, хочу анимации(((
-                LoginNumberLabel.TextColor = Colors.Green;
+                await LoginBorder.ColorTo(Colors.Yellow, Colors.Green, c => { LoginBorder.Stroke = c;
+                                                                              LoginNumberLabel.TextColor = c;}, 2000, Easing.SinIn);
                 LoginNumber.IsReadOnly = true;
                 await Grid1.TranslateToAsync(0, -140, 500, Easing.SinIn);
                 idk.SetRow(Grid1, 0);
@@ -76,9 +77,9 @@ public partial class LoginPage : ContentPage
         }
         catch (Exception)
         {
-            await DisplayAlertAsync("Error", "ошибка выполнения", "OK");
-            LoginBorder.Stroke = Colors.Red; //то же самое, хочу анимации(((
-            LoginNumberLabel.TextColor = Colors.Red;
+            await DisplayAlertAsync("Error", $"ошибка выполнения", "OK");
+            await LoginBorder.ColorTo(Color.FromArgb("6134f0"), Colors.Red, c => { LoginBorder.Stroke = c;
+                                                                                   LoginNumberLabel.TextColor = c;}, 2000, Easing.SinIn);
         }
 
         /*

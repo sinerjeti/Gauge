@@ -80,9 +80,9 @@
 
                     <Border
                         x:Name="LoginBorder"
-                        Stroke="#6134f0"
                         StrokeThickness="2"
                         StrokeShape="15"
+                        Stroke="#6134f0"
                         Margin="0"
                         VerticalOptions="Center">
 
